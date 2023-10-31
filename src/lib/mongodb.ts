@@ -12,4 +12,4 @@ let clientPromise: Promise<MongoClient>; // Define the clientPromise variable wi
 client = new MongoClient(uri);
 clientPromise = client.connect();
 
-export default clientPromise;
+export default clientPromise
