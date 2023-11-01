@@ -57,7 +57,7 @@ export default function RowAndColumnSpacing() {
                   Simply fill out the form and I'll be in touch soon.
                 </Typography>
 
-                <Link href={`/available-works/${art.id}`}>
+                <Link href={`/available-works/${art._id}`}>
                   <Button variant="contained" color="secondary">
                     About
                   </Button>
