@@ -9,7 +9,7 @@ import { Item } from "./page.styles";
 
 // import data from "../../data";
 
-import styles from "./styles.module.css";
+// import styles from "./styles.module.css";
 
 interface IData {
   id: number;
@@ -25,7 +25,7 @@ export default function RowAndColumnSpacing() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("http://localhost:3001/api/available-works");
+      const response = await fetch("http://localhost:3000/api/available-works");
       const data = await response.json();
       setData(data);
     };
@@ -35,7 +35,7 @@ export default function RowAndColumnSpacing() {
 
   return (
     <>
-      <h1>Available Works</h1>
+   
       <Grid
         container
         rowSpacing={1}
@@ -47,7 +47,7 @@ export default function RowAndColumnSpacing() {
             <Grid key={`firstArrayIndex ${index}`} item xs={6}>
               <Item>
                 <Image
-                  className={styles.image}
+                  // className={styles.image}
                   width={333}
                   height={333}
                   alt="slideshow"
@@ -56,13 +56,6 @@ export default function RowAndColumnSpacing() {
                 <Typography sx={{ marginBottom: 2 }} component="p">
                   Simply fill out the form and I'll be in touch soon.
                 </Typography>
-
-                <Button
-                  type="button"
-                  onClick={() => router.push(`/available-works/${art.id}`)}
-                >
-                  Details
-                </Button>
 
                 <Link href={`/available-works/${art.id}`}>
                   <Button variant="contained" color="secondary">
