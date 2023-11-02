@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: chrisdietrich366
+      MONGO_INITDB_ROOT_PASSWORD: Devindiet1
+    volumes:
+      - C:\Users\chris\OneDrive\Portfolio\mongodb:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - node-webapp-network
+
+  julie-website-mongo:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: julie-website-mongo
+    ports:
+      - "3000:3000"
+    
+    depends_on:
+      - mongodb
+     
+    networks:
+      - node-webapp-network
+networks:
+  node-webapp-network:
+    driver: bridge

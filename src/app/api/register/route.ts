@@ -24,9 +24,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         .json({ status: 400, message: "Incorrect email format" });
     }
       
-    const existingUser = await AppDataSource.manager.findOneBy(User, {
-      email,
-    });
+  
 
   
   return NextResponse.json({ status: 200 });
