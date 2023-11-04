@@ -1,6 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
 import AppBar from "@mui/material/AppBar";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -69,6 +70,7 @@ export default function Navbar() {
               </Link>
             );
           })}
+          <ShoppingCartIcon sx={{color: "#000"}}/>
         </Toolbar>
       </AppBar>
     </Box>

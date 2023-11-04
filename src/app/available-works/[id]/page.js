@@ -44,7 +44,7 @@ export default async function AvailableWorksDetails({ params: { id } }) {
             Ipsum has been the industry's standard dummy text ever since the
             1500s,
           </Typography>
-          <AddToCart />
+          <AddToCart id={data.id}/>
 
           {/* <TextField
             id="outlined-number"

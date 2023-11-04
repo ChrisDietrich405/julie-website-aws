@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "@/lib/mongoose";
 import { AvailableWorksModel } from "@/app/models/available-works";
 import { NextResponse, NextRequest } from "next/server";
 
@@ -17,7 +17,7 @@ export const GET = async (
       return NextResponse.json(
         { message: "Individual work not found" },
         { status: 404 }
-      );
+      ); 
     }
   } catch (error) {
     console.error(error);
