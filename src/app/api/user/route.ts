@@ -1,10 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import { UsersModel } from "@/app/models/users";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 
-dotenv.config();
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
   const { firstName, lastName, email, password } = await req.json();
@@ -41,17 +38,12 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       password: hashedPassword,
     });
 
-    const newUserVar = await newUser.save();
-    console.log("cool word", newUserVar.id);
-
-    const token = jwt.sign(
-      { id: newUserVar._id },
-      process.env.JWT_SECRET as string,
-      { expiresIn: "2d" }
-    );
-
-    return NextResponse.json({ token, status: 200 });
+    await newUser.save();
+  
+    return NextResponse.json({ status: 201, message: "User created" });
   } catch (error: any) {
     return NextResponse.json({ status: 500, message: error.message });
   }
 };
+
+

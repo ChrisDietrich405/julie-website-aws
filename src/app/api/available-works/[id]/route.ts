@@ -1,11 +1,9 @@
 import mongoose from "@/lib/mongoose";
 import { AvailableWorksModel } from "@/app/models/available-works";
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import { Params } from "@/app/types/params";
 
-export const GET = async (
-  request: Request,
-  { params }: { params: { id: string } }
-) => {
+export const GET = async ({ params }: Params) => {
   try {
     const id = new mongoose.Types.ObjectId(params.id);
     const individualWork = await AvailableWorksModel.findById(id);
@@ -17,7 +15,7 @@ export const GET = async (
       return NextResponse.json(
         { message: "Individual work not found" },
         { status: 404 }
-      ); 
+      );
     }
   } catch (error) {
     console.error(error);

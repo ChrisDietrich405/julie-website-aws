@@ -28,6 +28,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/available-works/[id]/page.js"
-  ],
+, "src/app/middleware/auth.js"  ],
   "exclude": ["node_modules"]
 }
