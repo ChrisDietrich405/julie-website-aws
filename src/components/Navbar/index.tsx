@@ -1,8 +1,10 @@
-import * as React from "react";
+"use client";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import AppBar from "@mui/material/AppBar";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Box from "@mui/material/Box";
+import Badge from "@mui/material/Badge";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -36,10 +38,40 @@ const navLinks = [
   },
 ];
 
+interface CartItem {
+  id: number;
+  price: number;
+  image: string;
+}
+
 export default function Navbar() {
+  const [cart, setCart] = useState<CartItem[]>([]);
   const appBarStyle = {
     backgroundColor: "white",
   };
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("cart");
+    if (storedData) {
+      const cartData = JSON.parse(storedData);
+      setCart(cartData);
+    }
+  }, [localStorage]);
+
+  // useEffect(() => {
+  //   function handleStorageChange() {
+  //     const storedData = JSON.parse(localStorage.getItem("cart") ?? "");
+  //     setCart(storedData);
+  //   }
+
+  //   window.addEventListener("storage", handleStorageChange);
+
+  //   return () => {
+  //     window.removeEventListener("storage", handleStorageChange);
+  //   };
+  // }, [localStorage]);
+
+  const length = cart.length;
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -70,7 +102,9 @@ export default function Navbar() {
               </Link>
             );
           })}
-          <ShoppingCartIcon sx={{color: "#000"}}/>
+          <Badge badgeContent={length} color="primary">
+            <ShoppingCartIcon sx={{ color: "#000" }} />
+          </Badge>
         </Toolbar>
       </AppBar>
     </Box>

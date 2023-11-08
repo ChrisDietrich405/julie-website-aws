@@ -5,35 +5,28 @@ import React, { useEffect, useState } from "react";
 
 interface CartItem {
   id: number;
-  price: number; 
+  price: number;
   image: string;
-  amount: number;  
 }
 
-const AddToCart = ({id}: any) => {
+const AddToCart = ({ data }: any) => {
   const [open, setOpen] = useState(false);
   const [cart, setCart] = useState<CartItem[]>([]);
-  
-  const handleClick = (id: any) => {
-    setOpen(true)
-    const positionIndex = cart.findIndex((cartItem) => cartItem.id === id)
-    if(positionIndex === -1) {
-      setCart((cart) => [...cart, { ...id, amount: 1}])
-    } else {
-      let newArray = [...cart ] // this gives me all my previous cart properties from one cart
-      let selectedItem = newArray[positionIndex]
-      selectedItem = {...selectedItem, amount: selectedItem.amount + 1}  
-      newArray[positionIndex] = selectedItem
-      setCart(newArray)
-      console.log(newArray)
-    }
- 
-  }
+  const [disableBtn, setDisableBtn] = useState(false);
 
-  // useEffect(() => {
-  //   localStorage.setItem("cart", JSON.stringify(cart));
-  //   console.log(cart)
-  // }, [cart])
+  const handleClick = (data: any) => {
+    setOpen(true);
+    setDisableBtn(true);
+    const positionIndex = cart.findIndex((cartItem) => cartItem.id === data.id);
+    if (positionIndex === -1) {
+      setCart((cart) => [...cart, { id: data.id, price: data.price, image: data.image }]);
+    }
+  };
+
+  useEffect(() => {
+    if(cart.length) {
+    localStorage.setItem("cart", JSON.stringify(cart))}
+  }, [cart]);
 
   const handleClose = (
     event: React.SyntheticEvent | Event,
@@ -46,32 +39,22 @@ const AddToCart = ({id}: any) => {
     setOpen(false);
   };
 
-
-  useEffect(() => {
-    const prevDataJSON: string | null = localStorage.getItem("cart");
-  
-    if (prevDataJSON) {
-      const prevData = JSON.parse(prevDataJSON); 
-      setCart(prevData);
-    }
-  }, []);
-  
   return (
     <div>
       {" "}
-      <Button variant="contained" color="secondary" onClick={() => handleClick(id)}>
+      <Button
+        disabled={disableBtn}
+        variant="contained"
+        color="secondary"
+        onClick={() => handleClick(data)}
+      >
         Add to cart
       </Button>
-      {cart.map((item) => {
-        return (
-          <h1>{item.amount}</h1>
-        )
-      })}
       <Snackbar
         open={open}
         autoHideDuration={6000}
         onClose={handleClose}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
           Item added to cart.

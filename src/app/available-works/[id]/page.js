@@ -12,8 +12,11 @@ async function getData(id) {
   return res.json();
 }
 
+
+
 export default async function AvailableWorksDetails({ params: { id } }) {
   const data = await getData(id);
+
 
   return (
     <Container sx={{ marginTop: "20px" }}>
@@ -44,19 +47,8 @@ export default async function AvailableWorksDetails({ params: { id } }) {
             Ipsum has been the industry's standard dummy text ever since the
             1500s,
           </Typography>
-          <AddToCart id={data.id}/>
+          <AddToCart data={data}/>
 
-          {/* <TextField
-            id="outlined-number"
-            min={1}
-            label="Quantity"
-            type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            inputProps={{ inputMode: "numeric", min: 1 }}
-            sx={{ display: "block", marginBottom: 2 }}
-          /> */}
         </Grid>
       </Grid>
     
