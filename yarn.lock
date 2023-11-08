@@ -358,6 +358,13 @@
   resolved "https://registry.npmjs.org/@types/bcryptjs/-/bcryptjs-2.4.5.tgz"
   integrity sha512-tOF6TivOIvq+TWQm78335CMdyVJhpBG3NUdWQDAp95ax4E2rSKbws/ELHLk5EBoucwx/tHt3/hhLOHwWJgVrSw==
 
+"@types/dotenv@^8.2.0":
+  version "8.2.0"
+  resolved "https://registry.npmjs.org/@types/dotenv/-/dotenv-8.2.0.tgz"
+  integrity sha512-ylSC9GhfRH7m1EUXBXofhgx4lUWmFeQDINW5oLuS+gxWdfUeW4zJdeVTYVkexEW+e2VUvlZR2kGnGGipAWR7kw==
+  dependencies:
+    dotenv "*"
+
 "@types/jsonwebtoken@^9.0.3":
   version "9.0.4"
   resolved "https://registry.npmjs.org/@types/jsonwebtoken/-/jsonwebtoken-9.0.4.tgz"
@@ -667,7 +674,7 @@ dom-helpers@^5.0.1:
     "@babel/runtime" "^7.8.7"
     csstype "^3.0.2"
 
-dotenv@^16.0.3:
+dotenv@*, dotenv@^16.0.3, dotenv@^16.3.1:
   version "16.3.1"
   resolved "https://registry.npmjs.org/dotenv/-/dotenv-16.3.1.tgz"
   integrity sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==

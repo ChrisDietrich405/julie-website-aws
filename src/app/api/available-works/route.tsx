@@ -1,12 +1,11 @@
-import clientPromise from "../../../lib/mongodb";
-import { NextResponse } from "next/server";
+import mongoose from "@/lib/mongoose";
+import { AvailableWorksModel } from "@/app/models/available-works";
+import { NextResponse, NextRequest } from "next/server";
 
 export const GET = async () => {
-  const client = await clientPromise;
-  const db = client.db("julie_website_mongo");
   try {
-    const works = await db.collection("available_works").find({}).toArray();
-    return NextResponse.json(works, { status: 200 });
+    const allWorks = await AvailableWorksModel.find();
+    return NextResponse.json(allWorks, { status: 200 });
   } catch (error) {
     return NextResponse.json({ message: error }, { status: 500 });
   }

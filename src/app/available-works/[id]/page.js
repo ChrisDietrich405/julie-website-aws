@@ -12,8 +12,6 @@ async function getData(id) {
   return res.json();
 }
 
-
-
 export default async function AvailableWorksDetails({ params: { id } }) {
   const data = await getData(id);
 
