@@ -22,6 +22,7 @@
     "mongodb": "^5.9.0",
     "mongoose": "^8.0.0",
     "next": "14.0.0",
+    "next-auth": "^4.24.4",
     "react": "^18",
     "react-dom": "^18",
     "reflect-metadata": "^0.1.13",
