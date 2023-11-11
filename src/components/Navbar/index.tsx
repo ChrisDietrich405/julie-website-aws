@@ -50,13 +50,13 @@ export default function Navbar() {
     backgroundColor: "white",
   };
 
-  useEffect(() => {
-    const storedData = localStorage.getItem("cart");
-    if (storedData) {
-      const cartData = JSON.parse(storedData);
-      setCart(cartData);
-    }
-  }, [localStorage]);
+  // useEffect(() => {
+  //   const storedData = localStorage.getItem("cart");
+  //   if (storedData) {
+  //     const cartData = JSON.parse(storedData);
+  //     setCart(cartData);
+  //   }
+  // }, [localStorage]);
 
   // useEffect(() => {
   //   function handleStorageChange() {

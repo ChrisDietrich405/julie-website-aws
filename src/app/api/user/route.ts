@@ -2,7 +2,6 @@ import { NextResponse, NextRequest } from "next/server";
 import { UsersModel } from "@/app/models/users";
 import bcrypt from "bcryptjs";
 
-
 export const POST = async (req: NextRequest, res: NextResponse) => {
   const { firstName, lastName, email, password } = await req.json();
 
@@ -39,11 +38,11 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     });
 
     await newUser.save();
-  
+
+    console.log("user", newUser);
+
     return NextResponse.json({ status: 201, message: "User created" });
   } catch (error: any) {
     return NextResponse.json({ status: 500, message: error.message });
   }
 };
-
-

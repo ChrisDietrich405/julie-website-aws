@@ -1,46 +1,25 @@
-
-// import { Params } from "./app/types/params";
-
-// interface IAuth extends Headers {}
-
-// export function middleware(req: NextRequest, { params }: Params) {
-
-//   let token: IAuth = req.headers;
-
-//   let anothername = token.values;
-//   console.log("anothername", anothername);
-//   // let tokenHeaders: IAuthorization = new Headers(req.headers.authorization);
-
-//   //   tokenHeaders: IHeadersAuthorization = tokenHeaders.authorization?.split(" ")[1]
-
-//   // if(!token) {
-//   //     NextResponse.json({status: 401, message: "Unauthorized"})
-//   // }
-
-//   return NextResponse.next();
-// }
 import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
-import jwt, { JwtPayload } from "jsonwebtoken"
+// import jwt, { JwtPayload } from "jsonwebtoken";
+import * as jose from "jose";
 
-export function middleware(req: NextRequest, res: NextResponse) {
+export const middleware = async (req: NextRequest, res: NextResponse) => {
   const headersInstance = headers();
   let authorization = headersInstance.get("authorization");
 
   // if(!authorization) {
   //   return res.status(401).json({})
   // }
+  const tokenNumber: any = authorization?.split(" ")[1];
 
-  const tokenNumber = authorization?.split(" ")[1];
+  const secret = new TextEncoder().encode(process.env.JWT_SECRET as string);
 
-  const decodedToken = jwt.verify(tokenNumber, process.env.JWT_SECRET as string)
+  const decodedToken = await jose.jwtVerify(tokenNumber, secret);
 
+  NextResponse.json(decodedToken.payload.id);
 
-  console.log("auth", authorization);
-  
-
-
-}
+  // return decodedToken.payload.id;
+};
 
 export const config = {
   matcher: "/api/user/:path*",

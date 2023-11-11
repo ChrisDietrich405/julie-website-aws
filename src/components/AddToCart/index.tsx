@@ -17,16 +17,31 @@ const AddToCart = ({ data }: any) => {
   const handleClick = (data: any) => {
     setOpen(true);
     setDisableBtn(true);
-    const positionIndex = cart.findIndex((cartItem) => cartItem.id === data.id);
+    const positionIndex = cart.findIndex(
+      (cartItem) => cartItem.id === data._id
+    );
     if (positionIndex === -1) {
-      setCart((cart) => [...cart, { id: data.id, price: data.price, image: data.image }]);
+      setCart((cart) => [
+        ...cart,
+        { id: data._id, price: data.price, image: data.image },
+      ]);
     }
   };
 
   useEffect(() => {
-    if(cart.length) {
-    localStorage.setItem("cart", JSON.stringify(cart))}
+    if (cart.length) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
   }, [cart]);
+
+  useEffect(() => {
+    const storage = localStorage.getItem("cart");
+    if (storage) {
+      const data = JSON.parse(storage);
+      setCart(data);
+      console.log(data)
+    }
+  }, []);
 
   const handleClose = (
     event: React.SyntheticEvent | Event,
