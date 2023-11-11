@@ -50,29 +50,14 @@ export default function Navbar() {
     backgroundColor: "white",
   };
 
-  // useEffect(() => {
-  //   const storedData = localStorage.getItem("cart");
-  //   if (storedData) {
-  //     const cartData = JSON.parse(storedData);
-  //     setCart(cartData);
-  //   }
-  // }, [localStorage]);
-
-  // useEffect(() => {
-  //   function handleStorageChange() {
-  //     const storedData = JSON.parse(localStorage.getItem("cart") ?? "");
-  //     setCart(storedData);
-  //   }
-
-  //   window.addEventListener("storage", handleStorageChange);
-
-  //   return () => {
-  //     window.removeEventListener("storage", handleStorageChange);
-  //   };
-  // }, [localStorage]);
-
+  useEffect(() => {
+    const storedData = localStorage.getItem("cart");
+    if (storedData) {
+      const cartData = JSON.parse(storedData);
+      setCart(cartData);
+    }
+  }, []);
   const length = cart.length;
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={appBarStyle}>
@@ -102,6 +87,7 @@ export default function Navbar() {
               </Link>
             );
           })}
+
           <Badge badgeContent={length} color="primary">
             <ShoppingCartIcon sx={{ color: "#000" }} />
           </Badge>
