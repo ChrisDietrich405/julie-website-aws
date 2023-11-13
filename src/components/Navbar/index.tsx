@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+
 import { cartContext } from "@/app/context/ContextAPI";
 
 const navLinks = [
@@ -47,6 +48,7 @@ interface CartItem {
 
 export default function Navbar() {
   const { cart } = useContext(cartContext);
+  console.log(cart.length);
 
   // const [cart, setCart] = useState<CartItem[]>([]);
   const appBarStyle = {
