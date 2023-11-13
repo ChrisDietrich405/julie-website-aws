@@ -20,6 +20,7 @@ const AddToCart = ({ data }: any) => {
     const positionIndex = cart.findIndex(
       (cartItem) => cartItem.id === data._id
     );
+
     if (positionIndex === -1) {
       setCart((cart) => [
         ...cart,
@@ -39,7 +40,7 @@ const AddToCart = ({ data }: any) => {
     if (storage) {
       const data = JSON.parse(storage);
       setCart(data);
-      console.log(data)
+      console.log(data);
     }
   }, []);
 
@@ -56,7 +57,7 @@ const AddToCart = ({ data }: any) => {
 
   return (
     <div>
-      {" "}
+      {" "}   
       <Button
         disabled={disableBtn}
         variant="contained"

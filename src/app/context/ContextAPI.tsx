@@ -10,16 +10,21 @@ export const cartContext = createContext<{
   setCart: () => {},
 });
 
+
+
 export const ContextProvider = ({ children }: any) => {
   const [cart, setCart] = useState<cartItem[]>([]);
 
   useEffect(() => {
-    const storage = localStorage.getItem("cart");
-    if (storage) {
-      const data = JSON.parse(storage);
-      setCart(data);
-      console.log(data);
-    }
+    setInterval(() => {
+      const storage = localStorage.getItem("cart");
+      if (storage) {
+        const data = JSON.parse(storage);
+        setCart(data);
+       
+      }
+   
+    }, 1000);
   }, []);
 
   return (

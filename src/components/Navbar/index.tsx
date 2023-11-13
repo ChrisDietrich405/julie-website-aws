@@ -47,21 +47,21 @@ interface CartItem {
 }
 
 export default function Navbar() {
+  
   const { cart } = useContext(cartContext);
-  console.log(cart.length);
 
-  // const [cart, setCart] = useState<CartItem[]>([]);
+
   const appBarStyle = {
     backgroundColor: "white",
   };
 
-  // useEffect(() => {
-  //   const storedData = localStorage.getItem("cart");
-  //   if (storedData) {
-  //     const cartData = JSON.parse(storedData);
-  //     setCart(cartData);
-  //   }
-  // }, []);
+
+  
+  useEffect(() => {
+    console.log("I'm here Chris");
+   
+}, [localStorage.getItem("cart")]);
+
   const length = cart?.length;
   return (
     <Box sx={{ flexGrow: 1 }}>

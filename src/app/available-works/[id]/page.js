@@ -15,7 +15,6 @@ async function getData(id) {
 export default async function AvailableWorksDetails({ params: { id } }) {
   const data = await getData(id);
 
-
   return (
     <Container sx={{ marginTop: "20px" }}>
       <Grid
@@ -45,11 +44,9 @@ export default async function AvailableWorksDetails({ params: { id } }) {
             Ipsum has been the industry's standard dummy text ever since the
             1500s,
           </Typography>
-          <AddToCart data={data}/>
-
+          <AddToCart data={data} />
         </Grid>
       </Grid>
-    
     </Container>
   );
 }
