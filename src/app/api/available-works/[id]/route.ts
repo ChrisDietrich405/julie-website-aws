@@ -3,9 +3,10 @@ import { AvailableWorksModel } from "@/app/models/available-works";
 import { NextResponse } from "next/server";
 import { Params } from "@/app/types/params";
 
-export const GET = async ({ params }: Params) => {
+export const GET = async (data: any) => {
+  console.log("INDIVIDUAL", data.query);
   try {
-    const id = new mongoose.Types.ObjectId(params.id);
+    const id = new mongoose.Types.ObjectId(data.id);
     const individualWork = await AvailableWorksModel.findById(id);
 
     if (individualWork) {
