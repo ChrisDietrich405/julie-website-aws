@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import AppBar from "@mui/material/AppBar";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -11,7 +12,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import { cartContext } from "@/app/context/ContextAPI";
+import { cartContext } from "@/app/context/cartContext";
 
 const navLinks = [
   {
@@ -40,29 +41,20 @@ const navLinks = [
   },
 ];
 
-interface CartItem {
-  id: number;
-  price: number;
-  image: string;
-}
-
 export default function Navbar() {
-  
   const { cart } = useContext(cartContext);
-
+  const router = useRouter();
 
   const appBarStyle = {
     backgroundColor: "white",
   };
 
-
-  
   useEffect(() => {
-    console.log("I'm here Chris");
-   
-}, [localStorage.getItem("cart")]);
+
+  }, [localStorage.getItem("cart")]);
 
   const length = cart?.length;
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={appBarStyle}>
@@ -94,7 +86,10 @@ export default function Navbar() {
           })}
 
           <Badge badgeContent={length} color="primary">
-            <ShoppingCartIcon sx={{ color: "#000" }} />
+            <ShoppingCartIcon
+              sx={{ color: "#000" }}
+              onClick={() => router.push("/checkout")}
+            />
           </Badge>
         </Toolbar>
       </AppBar>

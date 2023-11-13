@@ -1,7 +1,7 @@
 "use client";
 
 import { ThemeProvider } from "next-themes";
-import { ContextProvider } from "@/app/context/ContextAPI";
+import { ContextProvider } from "@/app/context/cartContext";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (

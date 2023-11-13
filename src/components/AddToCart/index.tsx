@@ -1,22 +1,19 @@
 "use client";
 
+import { cartContext } from "@/app/context/cartContext";
 import { Alert, Button, Snackbar } from "@mui/material";
-import React, { useEffect, useState } from "react";
-
-interface CartItem {
-  id: number;
-  price: number;
-  image: string;
-}
+import React, { useContext, useEffect, useState } from "react";
+import { workerData } from "worker_threads";
 
 const AddToCart = ({ data }: any) => {
   const [open, setOpen] = useState(false);
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const { cart, setCart } = useContext(cartContext);
   const [disableBtn, setDisableBtn] = useState(false);
 
   const handleClick = (data: any) => {
     setOpen(true);
     setDisableBtn(true);
+
     const positionIndex = cart.findIndex(
       (cartItem) => cartItem.id === data._id
     );
@@ -30,17 +27,12 @@ const AddToCart = ({ data }: any) => {
   };
 
   useEffect(() => {
-    if (cart.length) {
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
-  }, [cart]);
+    const positionIndex = cart.findIndex(
+      (cartItem) => cartItem.id === data._id
+    );
 
-  useEffect(() => {
-    const storage = localStorage.getItem("cart");
-    if (storage) {
-      const data = JSON.parse(storage);
-      setCart(data);
-      console.log(data);
+    if (positionIndex >= 0) {
+      setDisableBtn(true);
     }
   }, []);
 
@@ -57,7 +49,7 @@ const AddToCart = ({ data }: any) => {
 
   return (
     <div>
-      {" "}   
+      {" "}
       <Button
         disabled={disableBtn}
         variant="contained"

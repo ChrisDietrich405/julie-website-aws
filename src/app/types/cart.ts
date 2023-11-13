@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 
 
 export interface cartI {
-  _id: number;
+  id: number;
   price: number;
   image: string;
 }

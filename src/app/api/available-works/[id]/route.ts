@@ -1,16 +1,16 @@
 import mongoose from "@/lib/mongoose";
 import { AvailableWorksModel } from "@/app/models/available-works";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { Params } from "@/app/types/params";
 
-export const GET = async (data: any) => {
-  console.log("INDIVIDUAL", data.query);
+export const GET = async (req: NextRequest, { params }: Params) => {
   try {
-    const id = new mongoose.Types.ObjectId(data.id);
+    const id = new mongoose.Types.ObjectId(params.id);
+
     const individualWork = await AvailableWorksModel.findById(id);
 
     if (individualWork) {
-      console.log(individualWork, id);
+      
       return NextResponse.json(individualWork, { status: 200 });
     } else {
       return NextResponse.json(

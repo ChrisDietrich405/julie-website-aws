@@ -10,10 +10,6 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
     const id = new mongoose.Types.ObjectId(params.id);
     const user = await UsersModel.findById(id);
 
-    // if(id !== decdodedToken.payload.id) {
-
-    // }
-
     if(!user) {
       return NextResponse.json({ status: 404, message: "Not found" });
     }

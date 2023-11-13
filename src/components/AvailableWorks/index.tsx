@@ -7,8 +7,6 @@ import Link from "next/link";
 import { Button, Grid, Typography } from "@mui/material";
 import { Item } from "./page.styles";
 
-
-
 interface IData {
   id: number;
   price: number;
@@ -33,7 +31,6 @@ export default function RowAndColumnSpacing() {
 
   return (
     <>
-   
       <Grid
         container
         rowSpacing={1}
