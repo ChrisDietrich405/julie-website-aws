@@ -1,8 +1,6 @@
 import { createContext, useState, useEffect} from "react";
 import { cartItem } from "../types/cart";
 
-
-
 export const cartContext = createContext<cartItem>({});
 
 export const ExpenseProvider = ({ children }: any) => {

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Link from "next/link";
 import AppBar from "@mui/material/AppBar";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import { cartContext } from "@/app/context/ContextAPI";
 
 const navLinks = [
   {
@@ -45,19 +46,21 @@ interface CartItem {
 }
 
 export default function Navbar() {
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const { cart } = useContext(cartContext);
+
+  // const [cart, setCart] = useState<CartItem[]>([]);
   const appBarStyle = {
     backgroundColor: "white",
   };
 
-  useEffect(() => {
-    const storedData = localStorage.getItem("cart");
-    if (storedData) {
-      const cartData = JSON.parse(storedData);
-      setCart(cartData);
-    }
-  }, []);
-  const length = cart.length;
+  // useEffect(() => {
+  //   const storedData = localStorage.getItem("cart");
+  //   if (storedData) {
+  //     const cartData = JSON.parse(storedData);
+  //     setCart(cartData);
+  //   }
+  // }, []);
+  const length = cart?.length;
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={appBarStyle}>
