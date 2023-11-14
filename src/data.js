@@ -18,8 +18,9 @@ export default [
     id: 3,
     title: "Jerusalem Mills Road 2",
     measurements: "18 x 24",
-    image: "/images/art3.jpg", price: 300 },
-
+    image: "/images/art3.jpg",
+    price: 300,
+  },
 
   {
     id: 4,
@@ -29,5 +30,3 @@ export default [
     price: 333,
   },
 ];
-
- 

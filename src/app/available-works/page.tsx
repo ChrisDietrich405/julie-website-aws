@@ -5,12 +5,8 @@ import { Item } from "./page.styles";
 
 async function getData() {
   const res = await fetch("http://localhost:3000/api/available-works");
- 
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
+
     throw new Error("Failed to fetch data");
   }
 
@@ -36,7 +32,7 @@ export default async function Page() {
               <Grid key={`firstArrayIndex ${index}`} item xs={6}>
                 <Item>
                   <Image
-                    // className={styles.image}
+                
                     width={333}
                     height={333}
                     alt="slideshow"

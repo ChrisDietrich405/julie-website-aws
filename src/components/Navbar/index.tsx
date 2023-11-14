@@ -49,10 +49,6 @@ export default function Navbar() {
     backgroundColor: "white",
   };
 
-  useEffect(() => {
-
-  }, [localStorage.getItem("cart")]);
-
   const length = cart?.length;
 
   return (

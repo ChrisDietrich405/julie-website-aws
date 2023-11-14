@@ -1,6 +1,5 @@
 "use client";
 import { createContext, useState, useEffect } from "react";
-import { cartItem } from "../types/cart";
 import { cartI } from "../types/cart";
 
 export const cartContext = createContext<{
