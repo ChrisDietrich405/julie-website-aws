@@ -25,7 +25,13 @@ export const middleware = async (req: NextRequest, res: NextResponse) => {
 
       const decodedToken = await jose.jwtVerify(tokenNumber, secret);
 
+      if(!decodedToken.payload.id) {
+        return NextResponse.json("Unauthorized user", {status: 401})
+      }
+
       const requestHeaders = new Headers(req.headers);
+
+
       requestHeaders.set("x-decoded-id", `${decodedToken.payload.id}`);
 
       return NextResponse.next({
@@ -35,7 +41,6 @@ export const middleware = async (req: NextRequest, res: NextResponse) => {
       });
     }
   } catch (error) {
-    console.log(error);
-    return NextResponse.json("big problems Marcelo", { status: 500 });
+    return NextResponse.json("Server failed", { status: 500 });
   }
 };
