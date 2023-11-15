@@ -39,6 +39,10 @@ const navLinks = [
     title: "Book",
     route: "/book",
   },
+  {
+    title: "Log in",
+    route: "/login",
+  },
 ];
 
 export default function Navbar() {

@@ -5,8 +5,10 @@ if (!mongoose.models.users) {
   const usersSchema = new Schema({
     firstName: String,
     lastName: String,
-    password: String,
+    streetAddress: String,
+    city: String,
     email: { type: String, unique: true },
+    password: String,
   });
   mongoose.model("users", usersSchema);
 }
