@@ -8,9 +8,10 @@ import mongoose from "@/lib/mongoose";
 export const PUT = async (req: NextRequest, { params }: Params) => {
   try {
     const id = new mongoose.Types.ObjectId(params.id);
+    console.log("INDIVIDUAL ", id);
     const user = await UsersModel.findById(id);
 
-    if(!user) {
+    if (!user) {
       return NextResponse.json({ status: 404, message: "Not found" });
     }
 

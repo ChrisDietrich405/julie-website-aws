@@ -12,7 +12,6 @@ export const middleware = async (req: NextRequest, res: NextResponse) => {
 
   const decodedToken = await jose.jwtVerify(tokenNumber, secret);
  
-
   NextResponse.json(decodedToken.payload.id);
 };
 

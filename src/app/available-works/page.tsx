@@ -6,7 +6,6 @@ import { Item } from "./page.styles";
 async function getData() {
   const res = await fetch("http://localhost:3000/api/available-works");
   if (!res.ok) {
-
     throw new Error("Failed to fetch data");
   }
 
@@ -16,7 +15,6 @@ async function getData() {
 export default async function Page() {
   const data = await getData();
   
-
   return (
     <main>
       <h1>Available Works</h1>
@@ -32,7 +30,6 @@ export default async function Page() {
               <Grid key={`firstArrayIndex ${index}`} item xs={6}>
                 <Item>
                   <Image
-                
                     width={333}
                     height={333}
                     alt="slideshow"

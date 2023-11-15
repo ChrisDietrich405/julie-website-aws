@@ -3,9 +3,10 @@ const { Schema } = mongoose;
 
 if (!mongoose.models.available_works) {
   const availableWorksSchema = new Schema({
-    _id: Number,
     price: Number,
     image: String,
+    title: String,
+    measurements: String,
   });
   mongoose.model("available_works", availableWorksSchema);
 }
