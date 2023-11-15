@@ -24,17 +24,11 @@ export default async function AvailableWorksDetails({ params: { id } }) {
         sx={{ width: "100%" }}
       >
         <Grid item xs={6} sx={{ display: "flex", justifyContent: "end" }}>
-          <Image
-            // className={styles.image}
-            width={333}
-            height={333}
-            alt="slideshow"
-            src={data.image}
-          />
+          <Image width={333} height={333} alt="slideshow" src={data.image} />
         </Grid>
         <Grid item xs={6}>
           <Typography sx={{ marginBottom: 2 }} component="h3">
-            Title
+            {data.title}
           </Typography>
           <Typography sx={{ marginBottom: 2 }} component="p">
             {data.price}

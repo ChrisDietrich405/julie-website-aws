@@ -6,9 +6,10 @@ import { Params } from "@/app/types/params";
 export const GET = async (req: NextRequest, { params }: Params) => {
   try {
     const id = new mongoose.Types.ObjectId(params.id);
+    
 
     const individualWork = await AvailableWorksModel.findById(id);
- 
+
     if (individualWork) {
       return NextResponse.json(individualWork, { status: 200 });
     } else {

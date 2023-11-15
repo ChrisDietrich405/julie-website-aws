@@ -15,12 +15,12 @@ const Login = () => {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      console.log("hello world");
+   
       const response = await axios.post("http://localhost:3000/api/auth", {
         email,
         password,
       });
-      console.log(response);
+  
 
       localStorage.setItem("token", `Bearer ${response.data.token}`);
       //   if (response.data.account.profile_id === 1) {

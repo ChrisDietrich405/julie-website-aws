@@ -1,20 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
+
 import { Button, Grid, Typography } from "@mui/material";
 import { Item } from "./page.styles";
 
 async function getData() {
-  const res = await fetch("http://localhost:3000/api/available-works");
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
+  try {
+    const res = await fetch("http://localhost:3000/api/available-works");
 
-  return res.json();
+    if (!res.ok) {
+      throw new Error("Failed to fetch data");
+    }
+
+    const data = await res.json();
+
+    console.log("DATA!¿", data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export default async function Page() {
   const data = await getData();
-  
+
   return (
     <main>
       <h1>Available Works</h1>
@@ -36,7 +45,8 @@ export default async function Page() {
                     src={item.image}
                   />
                   <Typography sx={{ marginBottom: 2 }} component="p">
-                    Simply fill out the form and I'll be in touch soon.
+                    {item.title}
+                    {item.price}
                   </Typography>
 
                   <Link href={`/available-works/${item._id}`}>

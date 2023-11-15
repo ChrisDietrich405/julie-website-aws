@@ -26,7 +26,7 @@ const CreateAccount = () => {
         email,
         password,
       });
-      console.log(response);
+    
 
       localStorage.setItem("token", `Bearer ${response.data.token}`);
       //   if (response.data.account.profile_id === 1) {

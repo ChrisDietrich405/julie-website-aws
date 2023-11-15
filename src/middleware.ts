@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import * as jose from "jose";
 
 export const middleware = async (req: NextRequest, res: NextResponse) => {
-  const pathArray = ["/api/user", "/api/auth"];
+  const pathArray = ["/api/user", "/api/auth", "/api/available-works"];
 
   const pathName = req.nextUrl.pathname;
 
@@ -25,12 +25,11 @@ export const middleware = async (req: NextRequest, res: NextResponse) => {
 
       const decodedToken = await jose.jwtVerify(tokenNumber, secret);
 
-      if(!decodedToken.payload.id) {
-        return NextResponse.json("Unauthorized user", {status: 401})
+      if (!decodedToken.payload.id) {
+        return NextResponse.json("Unauthorized user", { status: 401 });
       }
 
       const requestHeaders = new Headers(req.headers);
-
 
       requestHeaders.set("x-decoded-id", `${decodedToken.payload.id}`);
 

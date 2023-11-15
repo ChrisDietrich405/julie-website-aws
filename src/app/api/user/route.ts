@@ -2,18 +2,23 @@ import { NextResponse, NextRequest } from "next/server";
 import { UsersModel } from "@/app/models/users";
 import bcrypt from "bcryptjs";
 
-
 export const POST = async (req: NextRequest, res: NextResponse) => {
-  const { firstName, lastName, streetAddress, city, email, password } = await req.json();
+  const { firstName, lastName, streetAddress, city, email, password } =
+    await req.json();
 
-  if (!firstName || !lastName || !streetAddress || !city || !email || !password) {
+  if (
+    !firstName ||
+    !lastName ||
+    !streetAddress ||
+    !city ||
+    !email ||
+    !password
+  ) {
     return NextResponse.json({
       status: 400,
       message: "Please add all necessary information",
     });
   }
-
-
 
   const emailFormat = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
