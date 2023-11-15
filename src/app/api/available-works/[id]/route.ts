@@ -8,8 +8,7 @@ export const GET = async (req: NextRequest, { params }: Params) => {
     const id = new mongoose.Types.ObjectId(params.id);
 
     const individualWork = await AvailableWorksModel.findById(id);
-    console.log("INDIVIDUAL ", individualWork);
-
+ 
     if (individualWork) {
       return NextResponse.json(individualWork, { status: 200 });
     } else {

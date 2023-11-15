@@ -3,18 +3,39 @@ import { headers } from "next/headers";
 import * as jose from "jose";
 
 export const middleware = async (req: NextRequest, res: NextResponse) => {
-  const headersInstance = headers();
-  let authorization = headersInstance.get("authorization");
+  const pathArray = ["/api/user", "/api/auth"];
 
-  const tokenNumber: any = authorization?.split(" ")[1];
+  const pathName = req.nextUrl.pathname;
 
-  const secret = new TextEncoder().encode(process.env.JWT_SECRET as string);
+  for (let item of pathArray) {
+    if (pathName === item) {
+      return NextResponse.next();
+    }
+  }
 
-  const decodedToken = await jose.jwtVerify(tokenNumber, secret);
- 
-  NextResponse.json(decodedToken.payload.id);
-};
+  try {
+    if (pathName.startsWith("/api")) {
+      const headersInstance = headers();
 
-export const config = {
-  matcher: "/api/user/:path*",
+      let authorization = headersInstance.get("authorization");
+
+      const tokenNumber: any = authorization?.split(" ")[1];
+
+      const secret = new TextEncoder().encode(process.env.JWT_SECRET as string);
+
+      const decodedToken = await jose.jwtVerify(tokenNumber, secret);
+
+      const requestHeaders = new Headers(req.headers);
+      requestHeaders.set("x-decoded-id", `${decodedToken.payload.id}`);
+
+      return NextResponse.next({
+        request: {
+          headers: requestHeaders,
+        },
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json("big problems Marcelo", { status: 500 });
+  }
 };
