@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Button, Grid, Typography } from "@mui/material";
+
 import { Item } from "./page.styles";
 
 async function getData() {
@@ -46,12 +47,11 @@ export default async function Page() {
                   />
                   <Typography sx={{ marginBottom: 2 }} component="p">
                     {item.title}
-                    {item.price}
                   </Typography>
 
                   <Link href={`/available-works/${item._id}`}>
-                    <Button variant="contained" color="secondary">
-                      About
+                    <Button variant="contained" color="primary">
+                      Details
                     </Button>
                   </Link>
                 </Item>

@@ -35,10 +35,10 @@ const navLinks = [
     title: "Available Works",
     route: "/available-works",
   },
-  {
-    title: "Book",
-    route: "/book",
-  },
+  // {
+  //   title: "Book",
+  //   route: "/book",
+  // },
   {
     title: "Log in",
     route: "/login",
@@ -58,7 +58,7 @@ export default function Navbar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={appBarStyle}>
-        <Toolbar>
+        <Toolbar sx={{ flexGrow: 1, backgroundColor: "#eeeff0" }}>
           <IconButton
             size="large"
             edge="start"

@@ -1,3 +1,12 @@
+:root {
+  --primary: #eeeff0;
+  /* --secondary: #cc1e1e;
+  --neutral-light: #c2b9c2;
+  --neutral-dark: #494850;
+  --hover: #1565c0;
+  --background: #f3f0f0; */
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

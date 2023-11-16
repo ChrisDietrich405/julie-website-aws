@@ -3,7 +3,12 @@ import { headers } from "next/headers";
 import * as jose from "jose";
 
 export const middleware = async (req: NextRequest, res: NextResponse) => {
-  const pathArray = ["/api/user", "/api/auth", "/api/available-works"];
+  const pathArray = [
+    "/api/user",
+    "/api/auth",
+    "/api/available-works",
+    "/api/available-works/[id]",
+  ];
 
   const pathName = req.nextUrl.pathname;
 

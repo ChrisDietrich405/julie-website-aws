@@ -14,6 +14,7 @@ async function getData(id) {
 
 export default async function AvailableWorksDetails({ params: { id } }) {
   const data = await getData(id);
+  console.log(data);
 
   return (
     <Container sx={{ marginTop: "20px" }}>
@@ -28,10 +29,11 @@ export default async function AvailableWorksDetails({ params: { id } }) {
         </Grid>
         <Grid item xs={6}>
           <Typography sx={{ marginBottom: 2 }} component="h3">
+            hello
             {data.title}
           </Typography>
           <Typography sx={{ marginBottom: 2 }} component="p">
-            {data.price}
+            ${data.price}
           </Typography>
           <Typography sx={{ marginBottom: 2 }} component="p">
             is simply dummy text of the printing and typesetting industry. Lorem
