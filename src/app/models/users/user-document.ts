@@ -7,7 +7,6 @@ interface UserDocument extends Document {
     city: String,
     email: String,
     password: String,
-
 }
 
 export default UserDocument;

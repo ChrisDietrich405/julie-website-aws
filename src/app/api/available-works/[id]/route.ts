@@ -3,10 +3,10 @@ import { AvailableWorksModel } from "@/app/models/available-works/available-work
 import { NextRequest, NextResponse } from "next/server";
 import { Params } from "@/app/types/params";
 
+
 export const GET = async (req: NextRequest, { params }: Params) => {
   try {
     const id = new mongoose.Types.ObjectId(params.id);
-    console.log(id);
 
     const individualWork = await AvailableWorksModel.findById(id);
 
@@ -26,3 +26,4 @@ export const GET = async (req: NextRequest, { params }: Params) => {
     );
   }
 };
+

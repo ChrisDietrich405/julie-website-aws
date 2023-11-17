@@ -3,7 +3,6 @@
 import { cartContext } from "@/app/context/cartContext";
 import { Alert, Button, Snackbar } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
-import { workerData } from "worker_threads";
 
 const AddToCart = ({ data }: any) => {
   const [open, setOpen] = useState(false);
@@ -14,15 +13,26 @@ const AddToCart = ({ data }: any) => {
     setOpen(true);
     setDisableBtn(true);
 
-    const positionIndex = cart.findIndex(
-      (cartItem) => cartItem.id === data._id
-    );
+    const token = localStorage.getItem("token");
+    if (token) {
+      const positionIndex = cart.findIndex(
+        (cartItem) => cartItem.id === data._id
+      );
 
-    if (positionIndex === -1) {
-      setCart((cart) => [
-        ...cart,
-        { id: data._id, price: data.price, image: data.image },
-      ]);
+      if (positionIndex === -1) {
+        setCart((cart) => [
+          ...cart,
+          {
+            id: data._id,
+            price: data.price,
+            image: data.image,
+            measurements: data.measurements,
+            title: data.title,
+          },
+        ]);
+      }
+    } else {
+      console.log("YOU SUCKKKKKKKKKKKK");
     }
   };
 

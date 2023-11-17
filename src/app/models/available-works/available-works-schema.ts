@@ -16,7 +16,6 @@ if (!mongoose.models.available_works) {
       type: String,
       required: true,
     },
-
     measurements: {
       type: String,
       required: true,

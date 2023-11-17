@@ -14,7 +14,6 @@ async function getData(id) {
 
 export default async function AvailableWorksDetails({ params: { id } }) {
   const data = await getData(id);
-  console.log(data);
 
   return (
     <Container sx={{ marginTop: "20px" }}>

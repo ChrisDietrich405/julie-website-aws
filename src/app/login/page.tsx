@@ -15,14 +15,14 @@ const Login = () => {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-   
       const response = await axios.post("http://localhost:3000/api/auth", {
         email,
         password,
       });
-  
 
-      localStorage.setItem("token", `Bearer ${response.data.token}`);
+        localStorage.setItem("token", `Bearer ${response.data.token}`)
+      
+     
       //   if (response.data.account.profile_id === 1) {
       //     Router.push("/invoice-dashboard");
       //   }
