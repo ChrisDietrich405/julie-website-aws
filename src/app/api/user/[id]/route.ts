@@ -7,23 +7,22 @@ import mongoose from "@/lib/mongoose";
 
 export const PUT = async (req: NextRequest, { params }: Params) => {
   const requestHeaders = new Headers(req.headers);
-  console.log(requestHeaders);
 
   try {
     const id = new mongoose.Types.ObjectId(params.id);
 
     const user = await UsersModel.findById(id);
 
-    if (requestHeaders.get("x-decoded-id") !== user.id) {
-      return NextResponse.json({ status: 401, message: "Unauthorized user" });
-    }
-
     if (!user) {
       return NextResponse.json({ status: 404, message: "Not found" });
     }
 
+    if (requestHeaders.get("x-decoded-id") !== user.id) {
+      return NextResponse.json({ status: 401, message: "Unauthorized user" });
+    }
+
     const { firstName, lastName, email, password, newPassword } =
-      await req.json();
+      await req.json()
 
     const matchedPassword = await bcrypt.compare(password, user.password);
     if (!matchedPassword) {
@@ -42,6 +41,7 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
 
     return NextResponse.json({ status: 200, message: "User updated" });
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ status: 500, message: "Server failed" });
   }
 };

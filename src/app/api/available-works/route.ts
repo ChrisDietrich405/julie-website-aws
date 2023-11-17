@@ -1,5 +1,5 @@
 import mongoose from "@/lib/mongoose";
-import { AvailableWorksModel } from "@/app/models/available-works";
+import { AvailableWorksModel } from "@/app/models/available-works/available-works-schema";
 import { NextResponse, NextRequest } from "next/server";
 
 export const GET = async () => {
