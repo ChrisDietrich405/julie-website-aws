@@ -1,12 +1,13 @@
 "use client";
 import React, { useState, FormEvent } from "react";
 import Link from "next/link";
-import Head from "next/head";
+
 import Router from "next/router";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 import styles from "./styles.module.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [password, setPassword] = useState("");
@@ -20,15 +21,17 @@ const Login = () => {
         password,
       });
 
-        localStorage.setItem("token", `Bearer ${response.data.token}`)
-      
-     
+      console.log(response);
+      localStorage.setItem("token", `Bearer ${response.data.token}`);
+      // Router.push("/available-works");
+
       //   if (response.data.account.profile_id === 1) {
       //     Router.push("/invoice-dashboard");
       //   }
       //   if (response.data.account.profile_id === 2) {
       //     Router.push("/useraccount");
       //   }
+      toast.success("Successfully logged in");
     } catch (error) {
       toast.error("Incorrect email or password");
     }
@@ -36,6 +39,7 @@ const Login = () => {
 
   return (
     <>
+      <ToastContainer />
       <form onSubmit={onSubmit} className={styles.form}>
         <h2>Log in</h2>
         <label htmlFor="email" className={styles.label}>
@@ -65,7 +69,7 @@ const Login = () => {
           Submit
         </button>
 
-        <p style={{ marginBottom: "10px" }}>New to Dietrich Land Care?</p>
+        <p style={{ marginBottom: "10px" }}>New to Julie Dtrick?</p>
         <Link href="/create-account">Create an account</Link>
       </form>
     </>
