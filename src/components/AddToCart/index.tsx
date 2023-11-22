@@ -10,27 +10,25 @@ const AddToCart = ({ data }: any) => {
   const [disableBtn, setDisableBtn] = useState(false);
 
   const handleClick = (data: any) => {
-
     setOpen(true);
     setDisableBtn(true);
 
-      const positionIndex = cart.findIndex(
-        (cartItem) => cartItem.id === data._id
-      );
+    const positionIndex = cart.findIndex(
+      (cartItem) => cartItem.id === data._id
+    );
 
-      if (positionIndex === -1) {
-        setCart((cart) => [
-          ...cart,
-          {
-            id: data._id,
-            price: data.price,
-            image: data.image,
-            measurements: data.measurements,
-            title: data.title,
-          },
-        ]);
-      }
- 
+    if (positionIndex === -1) {
+      setCart((cart) => [
+        ...cart,
+        {
+          id: data._id,
+          price: data.price,
+          image: data.image,
+          measurements: data.measurements,
+          title: data.title,
+        },
+      ]);
+    }
   };
 
   useEffect(() => {

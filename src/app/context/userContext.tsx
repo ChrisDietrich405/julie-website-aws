@@ -13,15 +13,6 @@ export const UserContextProvider = ({ children }: any) => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   const storage = localStorage.getItem("userId");
-  //   console.log("STORAGE", storage);
-  //   if (storage) {
-  //     const userId = JSON.parse(storage);
-  //     return userId;
-  //   }
-  // }, []);
-
   return (
     <userContext.Provider value={{ userId }}>{children}</userContext.Provider>
   );

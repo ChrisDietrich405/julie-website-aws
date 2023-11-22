@@ -26,6 +26,7 @@ const Login = () => {
       localStorage.setItem("token", `Bearer ${response.data.token}`);
 
       localStorage.setItem("userId", response.data.userId);
+
       // Router.push("/available-works");
 
       //   if (response.data.account.profile_id === 1) {
