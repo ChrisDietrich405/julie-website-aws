@@ -10,7 +10,7 @@ const AddToCart = ({ data }: any) => {
   const [disableBtn, setDisableBtn] = useState(false);
 
   const handleClick = (data: any) => {
-    console.log(data);
+
     setOpen(true);
     setDisableBtn(true);
 

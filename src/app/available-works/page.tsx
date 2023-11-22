@@ -15,7 +15,7 @@ async function getData() {
 
     const data = await res.json();
 
-    console.log("DATA!¿", data);
+
     return data;
   } catch (error) {
     console.log(error);

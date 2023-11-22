@@ -5,7 +5,6 @@ import {
   Grid,
   Typography,
   Card,
-  CardMedia,
   CardContent,
   CardActions,
   Button,
@@ -18,11 +17,12 @@ import { useContext } from "react";
 import { cartContext } from "@/app/context/cartContext";
 
 import styles from "./styles.module.css";
+import { userContext } from "../context/userContext";
 
-// const userId = localStorage.get("userId");
 const Checkout = () => {
   const { cart } = useContext(cartContext);
-
+  const { userId } = useContext(userContext);
+  console.log("ID", userId);
   const router = useRouter();
 
   return (
@@ -62,7 +62,7 @@ const Checkout = () => {
         <Grid item lg={3}>
           {" "}
           <Card>
-            <Button onClick={() => router.push("/payment/655d3cfb2d8ce14148c753a5")}>
+            <Button onClick={() => router.push(`/payment/${userId}`)}>
               Proceed to payment
             </Button>
           </Card>

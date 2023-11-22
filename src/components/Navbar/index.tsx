@@ -47,7 +47,7 @@ const navLinks = [
 
 export default function Navbar() {
   const { cart } = useContext(cartContext);
-  console.log(cart);
+
   const router = useRouter();
 
   const appBarStyle = {

@@ -10,14 +10,14 @@ export const cartContext = createContext<{
   setCart: () => {},
 });
 
-export const ContextProvider = ({ children }: any) => {
+export const CartContextProvider = ({ children }: any) => {
   const [cart, setCart] = useState<cartI[]>([]);
 
   useEffect(() => {
     if (cart.length) {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
-    console.log(cart.length);
+  
   }, [cart]);
 
   useEffect(() => {
