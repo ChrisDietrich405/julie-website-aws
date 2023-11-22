@@ -41,6 +41,8 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     const newUser = new UsersModel({
       firstName,
       lastName,
+      streetAddress,
+      city,
       email,
       password: hashedPassword,
     });

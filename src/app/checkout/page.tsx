@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import {
   Container,
   Grid,
@@ -8,48 +9,64 @@ import {
   CardContent,
   CardActions,
   Button,
+  Stack,
 } from "@mui/material";
-import { useContext } from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
+import { useContext } from "react";
 import { cartContext } from "@/app/context/cartContext";
 
-import React from "react";
+import styles from "./styles.module.css";
 
+// const userId = localStorage.get("userId");
 const Checkout = () => {
   const { cart } = useContext(cartContext);
+
+  const router = useRouter();
 
   return (
     <Container sx={{ marginTop: "30px" }}>
       <Grid container spacing={2}>
-        {cart.map((cartItem) => {
-          return (
-            <Grid item lg={12}>
-              <Card sx={{ maxWidth: 1200 }}>
-                <CardMedia
-                  sx={{ height: 140 }}
-                  image="/static/images/cards/contemplative-reptile.jpg"
-                  title="green iguana"
-                />
-                <CardContent>
-                  <h1>{cartItem.title}</h1>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {cartItem.title} helllooooo
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6,000 species, ranging across all continents except
-                    Antarctica
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small">Share</Button>
-                  <Button size="small">Learn More</Button>
-                </CardActions>
-              </Card>
-              {cartItem.price}
-            </Grid>
-          );
-        })}
+        <Grid item lg={9}>
+          {cart.map((cartItem) => {
+            return (
+              <>
+                <Card>
+                  <CardContent sx={{ display: "flex", columnGap: 3 }}>
+                    <Image
+                      width={333}
+                      height={333}
+                      alt="Picture of Julie"
+                      src="/images/art1.jpg"
+                    />
+                    <Stack rowGap={3} className={styles.card_content_items}>
+                      <Typography variant="h3" fontSize={24} fontWeight={600}>
+                        {cartItem.title}
+                      </Typography>
+                      <Typography fontSize={24} fontWeight={600}>
+                        {cartItem.measurements}
+                      </Typography>
+                      <Typography fontSize={24} fontWeight={600}>
+                        ${cartItem.price}
+                      </Typography>
+                    </Stack>
+                  </CardContent>
+                  <CardActions></CardActions>
+                </Card>
+              </>
+            );
+          })}
+        </Grid>
+
+        <Grid item lg={3}>
+          {" "}
+          <Card>
+            <Button onClick={() => router.push("/payment/655d3cfb2d8ce14148c753a5")}>
+              Proceed to payment
+            </Button>
+          </Card>
+        </Grid>
       </Grid>
     </Container>
   );

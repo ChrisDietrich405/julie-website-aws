@@ -1,60 +1,60 @@
 .form {
-    width: 300px;
-    margin: 3rem auto;
-    display: flex;
-    flex-direction: column;
-    flex: flex-start;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    padding: 1rem 1rem;
-  }
-  
-  .label {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-  }
-  
-  .input {
-    border-radius: 7px;
-    width: 100%;
-    transition: all 0.4s;
-    outline: none;
-    padding: 0.5rem 0;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-    border: 2px solid #000;
-    margin-bottom: 15px;
-    cursor: pointer;
-    padding: 10px;
-  }
-  
-  .button {
-    width: 100%;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: all 0.4s;
-    padding: 0.8rem 0.5rem;
-    margin-bottom: 20px;
-  }
-  
-  .button:hover {
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-  }
-  
-  .form a {
-    text-decoration: none;
-    color: #000;
-    border: 1px solid #000;
-    border-radius: 5px;
-    padding: 8px 24px;
-  }
-  
-  .form a:hover {
-    transition: 0.4s;
-    background-color: #000;
-    color: #fff;
-  }
-  
+  width: 300px;
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  flex: flex-start;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 1rem 1rem;
+}
+
+.label {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.input {
+  border-radius: 7px;
+  width: 100%;
+  transition: all 0.4s;
+  outline: none;
+  padding: 0.5rem 0;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  border: 2px solid #000;
+  margin-bottom: 15px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.button {
+  width: 100%;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: all 0.4s;
+  padding: 0.8rem 0.5rem;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.button:hover {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.form a {
+  text-decoration: none;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 8px 24px;
+}
+
+.form a:hover {
+  transition: 0.4s;
+  background-color: #000;
+  color: #fff;
+}

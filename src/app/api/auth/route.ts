@@ -44,7 +44,10 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     { expiresIn: "2d" }
   );
 
-  return NextResponse.json({ token, status: 200, message: "User logged in" });
-
- 
-};
+  return NextResponse.json({
+    userId: existingAccount._id,
+    token,
+    status: 200,
+    message: "User logged in",
+  });
+}; 

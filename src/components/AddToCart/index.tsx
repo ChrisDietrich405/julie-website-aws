@@ -10,11 +10,10 @@ const AddToCart = ({ data }: any) => {
   const [disableBtn, setDisableBtn] = useState(false);
 
   const handleClick = (data: any) => {
+    console.log(data);
     setOpen(true);
     setDisableBtn(true);
 
-    const token = localStorage.getItem("token");
-    if (token) {
       const positionIndex = cart.findIndex(
         (cartItem) => cartItem.id === data._id
       );
@@ -31,9 +30,7 @@ const AddToCart = ({ data }: any) => {
           },
         ]);
       }
-    } else {
-      console.log("YOU SUCKKKKKKKKKKKK");
-    }
+ 
   };
 
   useEffect(() => {

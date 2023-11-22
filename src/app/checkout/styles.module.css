@@ -1,0 +1,11 @@
+.card_content_items {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card_content_items h1 {
+  width: 100px;
+}
+
+ 

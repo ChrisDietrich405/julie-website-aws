@@ -17,6 +17,7 @@ export const ContextProvider = ({ children }: any) => {
     if (cart.length) {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
+    console.log(cart.length);
   }, [cart]);
 
   useEffect(() => {

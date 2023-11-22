@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, FormEvent } from "react";
 import axios from "axios";
-import Head from "next/head";
-import Router from "next/router";
+
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 import styles from "./styles.module.css";
@@ -15,6 +15,8 @@ const CreateAccount = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const router = useRouter();
+
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -26,9 +28,10 @@ const CreateAccount = () => {
         email,
         password,
       });
-    
 
       localStorage.setItem("token", `Bearer ${response.data.token}`);
+      router.push("/login");
+      toast.success("Created account successfully");
       //   if (response.data.account.profile_id === 1) {
       //     Router.push("/invoice-dashboard");
       //   }
@@ -97,7 +100,6 @@ const CreateAccount = () => {
             className={styles.input}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            // onBlur={handleBlur}
           />
         </label>
         <label htmlFor="password" className={styles.label}>
@@ -117,7 +119,7 @@ const CreateAccount = () => {
         </button>
       </form>
     </>
-  );
+  ); 
 };
 
 export default CreateAccount;

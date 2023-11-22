@@ -2,7 +2,7 @@
 import React, { useState, FormEvent } from "react";
 import Link from "next/link";
 
-import Router from "next/router";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -13,6 +13,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
+  const router = useRouter();
+
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -21,8 +23,9 @@ const Login = () => {
         password,
       });
 
-      console.log(response);
       localStorage.setItem("token", `Bearer ${response.data.token}`);
+
+      localStorage.setItem("userId", response.data.userId);
       // Router.push("/available-works");
 
       //   if (response.data.account.profile_id === 1) {
@@ -31,7 +34,7 @@ const Login = () => {
       //   if (response.data.account.profile_id === 2) {
       //     Router.push("/useraccount");
       //   }
-      toast.success("Successfully logged in");
+      router.push("/");
     } catch (error) {
       toast.error("Incorrect email or password");
     }
