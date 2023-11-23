@@ -1,10 +1,11 @@
 "use client";
-import React, { useState, FormEvent } from "react";
+import React, { useState, FormEvent, useContext } from "react";
 import Link from "next/link";
-
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
+
+import { userContext } from "../context/userContext";
 
 import styles from "./styles.module.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,6 +13,8 @@ import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+
+  const { userId, setUserId } = useContext(userContext);
 
   const router = useRouter();
 
@@ -23,9 +26,10 @@ const Login = () => {
         password,
       });
 
+      setUserId(response.data.userId)
+
       localStorage.setItem("token", `Bearer ${response.data.token}`);
 
-      localStorage.setItem("userId", response.data.userId);
 
       // Router.push("/available-works");
 

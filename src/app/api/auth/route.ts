@@ -50,4 +50,4 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     status: 200,
     message: "User logged in",
   });
-}; 
+};

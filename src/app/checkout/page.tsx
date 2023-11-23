@@ -22,7 +22,7 @@ import { userContext } from "../context/userContext";
 const Checkout = () => {
   const { cart } = useContext(cartContext);
   const { userId } = useContext(userContext);
-  console.log("ID", userId);
+
   const router = useRouter();
 
   return (

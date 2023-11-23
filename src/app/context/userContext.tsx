@@ -1,10 +1,23 @@
 "use client";
-import { createContext, useState, useEffect } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useState,
+  useEffect,
+} from "react";
 
-export const userContext = createContext<{ userId: string }>({ userId: "" });
+export const userContext = createContext<{
+  userId: string;
+  setUserId: Dispatch<SetStateAction<string>>;
+}>({ userId: "", setUserId: () => {} });
 
 export const UserContextProvider = ({ children }: any) => {
   const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("userId", userId);
+  }, [userId]);
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -14,6 +27,8 @@ export const UserContextProvider = ({ children }: any) => {
   }, []);
 
   return (
-    <userContext.Provider value={{ userId }}>{children}</userContext.Provider>
+    <userContext.Provider value={{ userId, setUserId }}>
+      {children}
+    </userContext.Provider>
   );
 };

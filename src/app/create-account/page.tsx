@@ -20,7 +20,7 @@ const CreateAccount = () => {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/api/user", {
+      await axios.post("http://localhost:3000/api/user", {
         firstName,
         lastName,
         streetAddress,
@@ -29,7 +29,7 @@ const CreateAccount = () => {
         password,
       });
 
-      localStorage.setItem("token", `Bearer ${response.data.token}`);
+      // localStorage.setItem("token", `Bearer ${response.data.token}`);
       router.push("/login");
       toast.success("Created account successfully");
       //   if (response.data.account.profile_id === 1) {
@@ -119,7 +119,7 @@ const CreateAccount = () => {
         </button>
       </form>
     </>
-  ); 
+  );
 };
 
 export default CreateAccount;

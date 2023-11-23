@@ -1,24 +1,23 @@
-"use client";
-import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
-import { userContext } from "@/app/context/userContext";
+// import Image from "next/image";
+import { Container } from "@mui/joy";
+// import { Grid, Typography, TextField } from "@mui/material";
+// import AddToCart from "@/components/AddToCart";
 
-const Payment = ({ params: { id } }: any) => {
-  const { userId } = useContext(userContext);
-
-  const getUser = async () => {
-    const response = await axios.get(
-      `http://localhost:3000/api/user/${userId}`
+async function getData(id: string) {
+  try {
+    const res = await axios.get(
+      "http://localhost:3000/api/user/655e9b4823f433a510193b11"
     );
-    console.log(response);
-  };
+    console.log(res);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 
-  useEffect(() => {
-    getUser();
-  }, []);
+export default async function Payment({ params: { id } }: any) {
+  const data = await getData(id);
 
-  return <div>Payment</div>;
-};
-
-export default Payment;
+  return <Container sx={{ margin: "60px" }}>hello</Container>;
+}
