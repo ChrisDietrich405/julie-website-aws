@@ -52,9 +52,16 @@
   padding: 8px 24px;
 }
 
-
 .form a:hover {
   transition: 0.4s;
   background-color: #000;
   color: #fff;
+}
+
+.loader {
+  height: 500px;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
