@@ -62,9 +62,15 @@ const Checkout = () => {
         <Grid item lg={3}>
           {" "}
           <Card>
-            <Button onClick={() => router.push(`/payment/${userId}`)}>
-              Proceed to payment
-            </Button>
+            {userId ? (
+              <Button onClick={() => router.push("/delivery-details")}>
+                Proceed to delivery details
+              </Button>
+            ) : (
+              <Button onClick={() => router.push(`/login`)}>
+                Please login
+              </Button>
+            )}
           </Card>
         </Grid>
       </Grid>

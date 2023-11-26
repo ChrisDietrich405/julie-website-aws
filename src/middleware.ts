@@ -26,6 +26,8 @@ export const middleware = async (req: NextRequest, res: NextResponse) => {
 
     requestHeaders.set("x-decoded-id", `${decodedToken.payload.id}`);
 
+
+
     return NextResponse.next({
       request: {
         headers: requestHeaders,

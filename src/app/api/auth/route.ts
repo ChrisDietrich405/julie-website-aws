@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-import { UsersModel } from "@/app/models/users";
+import { UsersModel } from "@/app/models/users/user-schema";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";

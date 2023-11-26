@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import bcrypt from "bcryptjs";
 
 import { Params } from "@/app/types/params";
-import { UsersModel } from "@/app/models/users";
+import { UsersModel } from "@/app/models/users/user-schema";
 import mongoose from "@/lib/mongoose";
 
 export const PUT = async (req: NextRequest, { params }: Params) => {
