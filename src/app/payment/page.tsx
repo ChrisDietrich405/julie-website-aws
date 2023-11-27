@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 
 // import Image from "next/image";
-import { Container, Button } from "@mui/joy";
+import { Container, Button, Typography } from "@mui/joy";
 import { Router } from "next/router";
 // import { Grid, Typography, TextField } from "@mui/material";
 // import AddToCart from "@/components/AddToCart";
@@ -37,6 +37,7 @@ const Payment = () => {
 
   return (
     <Container sx={{ margin: "60px" }}>
+      <Typography>Here is where we will add the credit card info</Typography>
       <Button onClick={handleUpdatePayment}>Save payment</Button>
     </Container>
   );

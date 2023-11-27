@@ -6,6 +6,8 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import { Oval } from "react-loader-spinner";
 
+import { cartContext } from "@/app/context/cartContext";
+
 <Oval
   height={80}
   width={80}
@@ -30,6 +32,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const { userId, setUserId } = useContext(userContext);
+  const { cart } = useContext(cartContext);
 
   const router = useRouter();
 
@@ -46,15 +49,13 @@ const Login = () => {
 
       localStorage.setItem("token", `Bearer ${response.data.token}`);
 
-      // Router.push("/available-works");
+      if (cart) {
+        router.push("/delivery-details");
+      }
+      if (!cart) {
+        router.push("/");
+      }
 
-      //   if (response.data.account.profile_id === 1) {
-      //     Router.push("/invoice-dashboard");
-      //   }
-      //   if (response.data.account.profile_id === 2) {
-      //     Router.push("/useraccount");
-      //   }
-      router.push("/");
       setLoading(false);
     } catch (error) {
       toast.error("Incorrect email or password");
