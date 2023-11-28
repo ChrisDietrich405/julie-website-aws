@@ -25,6 +25,7 @@ import { userContext } from "../context/userContext";
 
 import styles from "./styles.module.css";
 import "react-toastify/dist/ReactToastify.css";
+import { Container } from "@mui/joy";
 
 const Login = () => {
   const [password, setPassword] = useState("");
@@ -63,7 +64,11 @@ const Login = () => {
   };
 
   return (
-    <>
+    <Container
+      maxWidth="xl"
+      style={{ padding: 0, margin: 0, height: "100vh" }}
+      className={styles.container_background}
+    >
       <ToastContainer />
 
       {loading ? (
@@ -104,7 +109,7 @@ const Login = () => {
           <Link href="/create-account">Create an account</Link>
         </form>
       )}
-    </>
+    </Container>
   );
 };
 

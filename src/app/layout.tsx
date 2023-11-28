@@ -1,12 +1,27 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Roboto_Mono } from "next/font/google";
+// import { ThemeProvider, createMuiTheme } from 'material-ui/styles';
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Providers } from "../components/Providers";
 
-const inter = Inter({ subsets: ["latin"] });
+const robotoMono = Roboto_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto-mono",
+});
+
+// const THEME = createMuiTheme({
+//   typography: {
+//    "fontFamily": `"Roboto", "Helvetica", "Arial", sans-serif`,
+//    "fontSize": 14,
+//    "fontWeightLight": 300,
+//    "fontWeightRegular": 400,
+//    "fontWeightMedium": 500
+//   }
+// });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,13 +35,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+       {/* <ThemeProvider theme={THEME}> */}
+      <body className={robotoMono.className}>
         <Providers>
           <Navbar />
           {children}
           <Footer />
         </Providers>
       </body>
+      {/* </ThemeProvider> */}
     </html>
   );
 }
