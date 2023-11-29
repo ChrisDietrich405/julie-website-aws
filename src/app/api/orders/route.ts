@@ -1,9 +1,23 @@
 import { NextResponse, NextRequest } from "next/server";
-
+import mongoose from "@/lib/mongoose";
+import { UsersModel } from "@/app/models/users/user-schema";
 import { OrdersModel } from "@/app/models/orders/orders-schema";
+import CreateAccount from "@/app/create-account/page";
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
+  const requestHeaders = new Headers(req.headers);
   const { customer, deliveryAddress } = await req.json();
+
+  const userId = requestHeaders.get("x-decoded-id");
+
+
+  if (!userId) {
+    return NextResponse.json({ status: 401, message: "Unauthorized user" });
+  }
+
+  const id = new mongoose.Types.ObjectId(userId);
+
+  const user = await UsersModel.findById(id);
 
   if (
     !customer.firstName ||
@@ -11,7 +25,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     !deliveryAddress.streetAddress ||
     !deliveryAddress.city ||
     !deliveryAddress.zipCode ||
-    !customer.email ||
     !customer.phoneNumber
   ) {
     return NextResponse.json({
@@ -20,21 +33,14 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     });
   }
 
-  const emailFormat = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
-  if (!customer.email.match(emailFormat)) {
-    return NextResponse.json({
-      status: 400,
-      message: "Incorrect email format",
-    });
-  }
+  customer.email = user.email;
 
   try {
     const newOrder = new OrdersModel({
       customer,
       deliveryAddress,
       status: "shopping cart",
-      orderCode: Math.random(),
+      orderCode: "2",
     });
 
     await newOrder.save();

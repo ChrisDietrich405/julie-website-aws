@@ -35,12 +35,24 @@ const CreateAccount = () => {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:3000/api/orders", {
-        customer,
-        deliveryAddress,
-      });
 
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/orders",
+        {
+          customer,
+          deliveryAddress,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      console.log(response.data.orderCode);
       setOrderCode(response.data.orderCode);
       localStorage.setItem("orderCode", response.data.orderCode);
       router.push("/payment");
@@ -115,17 +127,7 @@ const CreateAccount = () => {
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="email" className={styles.label}>
-          Email
-          <input
-            type="text"
-            name="email"
-            id="email"
-            className={styles.input}
-            value={customer.email}
-            onChange={handleChange}
-          />
-        </label>
+
         <label htmlFor="phoneNumber" className={styles.label}>
           Phone Number
           <input

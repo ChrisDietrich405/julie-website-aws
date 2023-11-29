@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import * as jose from "jose";
 
 export const config = {
-  matcher: "/api/user/:path+",
+  matcher: ["/api/user/:path+"],
 };
 
 export const middleware = async (req: NextRequest, res: NextResponse) => {
@@ -25,8 +25,6 @@ export const middleware = async (req: NextRequest, res: NextResponse) => {
     const requestHeaders = new Headers(req.headers);
 
     requestHeaders.set("x-decoded-id", `${decodedToken.payload.id}`);
-
-
 
     return NextResponse.next({
       request: {

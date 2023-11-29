@@ -50,11 +50,13 @@ const Login = () => {
 
       localStorage.setItem("token", `Bearer ${response.data.token}`);
 
-      if (cart) {
-        router.push("/delivery-details");
-      }
-      if (!cart) {
+      if (cart.length === 0) {
+        console.log(cart.length);
         router.push("/");
+      }
+
+      if (cart.length > 0) {
+         router.push("/delivery-details");
       }
 
       setLoading(false);

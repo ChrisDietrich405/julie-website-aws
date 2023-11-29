@@ -5,12 +5,9 @@ import React from "react";
 import axios from "axios";
 import { Button } from "@mui/joy";
 
-// const ReviewPurchase = () => {
-//   return <h1>hello</h1>;
-// };
-
 const ReviewPurchase = () => {
   const [orderCodeState, setOrderCodeState] = useState("");
+  const [data, setData] = useState({});
 
   const router = useRouter();
 
@@ -22,13 +19,17 @@ const ReviewPurchase = () => {
     }
   }, []);
 
-  const handleGetOrder = () => {
-    getOrderCode();
-    router.push("/receipt");
-  };
+  useEffect(() => {
+    getOrderDetails();
+  }, []);
 
-  const getOrderCode = async () => {
-    const response = axios.get(
+  // const handleGetOrder = () => {
+  //   getOrderCode();
+  //   router.push("/receipt");
+  // };
+
+  const getOrderDetails = async () => {
+    const response = await axios.get(
       `http://localhost:3000/api/orders/${orderCodeState}`
     );
     console.log(response);
@@ -37,7 +38,7 @@ const ReviewPurchase = () => {
   return (
     <div>
       ReviewPurchase
-      <Button onClick={handleGetOrder}>Finalize Purchase</Button>
+      <Button>Finalize Purchase</Button>
     </div>
   );
 };
