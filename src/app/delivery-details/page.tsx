@@ -4,6 +4,7 @@ import axios from "axios";
 
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { Container } from "@mui/joy";
 
 import styles from "./styles.module.css";
 
@@ -69,82 +70,90 @@ const CreateAccount = () => {
   };
 
   return (
-    <>
+    <Container
+      maxWidth="xl"
+      style={{ padding: 0, margin: 0, height: "100vh" }}
+      className={styles.container_background}
+    >
+      <h2>Add Delivery Details</h2>
       <form onSubmit={onSubmit} className={styles.form}>
-        <h2>Add Delivery Details</h2>
-        <label htmlFor="firstName" className={styles.label}>
-          First Name
-          <input
-            type="text"
-            name="firstName"
-            id="firstName"
-            className={styles.input}
-            value={customer.firstName}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="lastName" className={styles.label}>
-          Last Name
-          <input
-            type="text"
-            name="lastName"
-            id="lastName"
-            className={styles.input}
-            value={customer.lastName}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="streetAddress" className={styles.label}>
-          Street Address
-          <input
-            type="text"
-            name="streetAddress"
-            id="streetAddress"
-            className={styles.input}
-            value={deliveryAddress.streetAddress}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="city" className={styles.label}>
-          City
-          <input
-            type="text"
-            name="city"
-            id="city"
-            className={styles.input}
-            value={deliveryAddress.city}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="city" className={styles.label}>
-          Zip Code
-          <input
-            type="text"
-            name="zipCode"
-            id="zipCode"
-            className={styles.input}
-            value={deliveryAddress.zipCode}
-            onChange={handleChange}
-          />
-        </label>
+        <div className={styles.form_section}>
+          <label htmlFor="firstName" className={styles.label}>
+            First Name
+            <input
+              type="text"
+              name="firstName"
+              id="firstName"
+              className={styles.input}
+              value={customer.firstName}
+              onChange={handleChange}
+            />
+          </label>
+          <label htmlFor="lastName" className={styles.label}>
+            Last Name
+            <input
+              type="text"
+              name="lastName"
+              id="lastName"
+              className={styles.input}
+              value={customer.lastName}
+              onChange={handleChange}
+            />
+          </label>
+          <label htmlFor="streetAddress" className={styles.label}>
+            Street Address
+            <input
+              type="text"
+              name="streetAddress"
+              id="streetAddress"
+              className={styles.input}
+              value={deliveryAddress.streetAddress}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+        <div className={styles.form_section}>
+          <label htmlFor="city" className={styles.label}>
+            City
+            <input
+              type="text"
+              name="city"
+              id="city"
+              className={styles.input}
+              value={deliveryAddress.city}
+              onChange={handleChange}
+            />
+          </label>
+          <label htmlFor="city" className={styles.label}>
+            Zip Code
+            <input
+              type="text"
+              name="zipCode"
+              id="zipCode"
+              className={styles.input}
+              value={deliveryAddress.zipCode}
+              onChange={handleChange}
+            />
+          </label>
 
-        <label htmlFor="phoneNumber" className={styles.label}>
-          Phone Number
-          <input
-            type="number"
-            name="phoneNumber"
-            id="phoneNumber"
-            className={styles.input}
-            value={customer.phoneNumber}
-            onChange={handleChange}
-          />
-        </label>
-
-        <button type="submit" className={styles.button}>
-          Submit
-        </button>
+          <label htmlFor="phoneNumber" className={styles.label}>
+            Phone Number
+            <input
+              type="number"
+              name="phoneNumber"
+              id="phoneNumber"
+              className={styles.input}
+              value={customer.phoneNumber}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
       </form>
-    </>
+
+      <button type="submit" className={styles.button}>
+        Submit
+      </button>
+    </Container>
   );
 };
 

@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, FormEvent } from "react";
 import axios from "axios";
-
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { Container } from "@mui/joy";
 
 import styles from "./styles.module.css";
 
@@ -44,7 +44,11 @@ const CreateAccount = () => {
   };
 
   return (
-    <>
+    <Container
+      maxWidth="xl"
+      style={{ padding: 0, margin: 0, height: "100vh" }}
+      className={styles.container_background}
+    >
       <form onSubmit={onSubmit} className={styles.form}>
         <h2>Create account</h2>
         <label htmlFor="firstName" className={styles.label}>
@@ -118,7 +122,7 @@ const CreateAccount = () => {
           Submit
         </button>
       </form>
-    </>
+    </Container>
   );
 };
 

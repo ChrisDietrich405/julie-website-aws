@@ -5,8 +5,13 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import { Oval } from "react-loader-spinner";
+import { Container } from "@mui/joy";
 
+import { userContext } from "../context/userContext";
 import { cartContext } from "@/app/context/cartContext";
+
+import styles from "./styles.module.css";
+import "react-toastify/dist/ReactToastify.css";
 
 <Oval
   height={80}
@@ -20,12 +25,6 @@ import { cartContext } from "@/app/context/cartContext";
   strokeWidth={2}
   strokeWidthSecondary={2}
 />;
-
-import { userContext } from "../context/userContext";
-
-import styles from "./styles.module.css";
-import "react-toastify/dist/ReactToastify.css";
-import { Container } from "@mui/joy";
 
 const Login = () => {
   const [password, setPassword] = useState("");
@@ -56,7 +55,7 @@ const Login = () => {
       }
 
       if (cart.length > 0) {
-         router.push("/delivery-details");
+        router.push("/delivery-details");
       }
 
       setLoading(false);
