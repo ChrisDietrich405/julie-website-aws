@@ -14,19 +14,20 @@ services:
     networks:
       - node-webapp-network
 
-  julie-website-mongo:
-    build:
+  julie-website-mongo:   
+    build:  
       context: ./
       dockerfile: Dockerfile
-    container_name: julie-website-mongo
     ports:
       - "3000:3000"
-    
+    volumes: 
+      - ./app:/app
     depends_on:
       - mongodb
      
     networks:
       - node-webapp-network
+
 networks:
   node-webapp-network:
     driver: bridge

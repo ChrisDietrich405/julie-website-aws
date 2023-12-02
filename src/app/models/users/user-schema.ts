@@ -1,5 +1,3 @@
-
-
 import { Schema, model } from "mongoose";
 import mongoose from "@/lib/mongoose";
 import UserDocument from "./user-document";
