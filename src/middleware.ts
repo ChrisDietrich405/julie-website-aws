@@ -1,7 +1,5 @@
-import { NextRequest, NextResponse } from "next/dist/server/web/spec-extension/request";
-
-// import { NextRequest, NextResponse } from "next/server";
-// import { headers } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
+import { headers } from "next/headers";
 import * as jose from "jose";
 
 export const config = {
