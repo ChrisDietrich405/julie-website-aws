@@ -9,11 +9,10 @@ const index = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <Container
-        sx={{ display: "Grid", marginBottom: 200, gap: 4, marginTop: 4 }}
-      >
-        <Typography level="h2" sx={{ textAlign: "center", mt: 4 }}>
+    <Container  sx={{
+      backgroundColor: 'grey.100'
+    }}>
+        <Typography component="h4" sx={{ textAlign: "center", mt: 4 }}>
           Sign up to my newsletter for exclusive updates
         </Typography>
         <Box
@@ -53,8 +52,7 @@ const index = () => {
         <Typography sx={{ textAlign: "center" }}>
           Copyright © Dietrich {copyrightYear()}
         </Typography>
-      </Container>
-    </div>
+    </Container>
   );
 };
 

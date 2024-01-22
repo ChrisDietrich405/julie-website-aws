@@ -8,8 +8,8 @@ const AddressForm: React.FC<AddressFormProps> =
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prevData) => ({
       ...prevData,
-      address: {
-        ...prevData.address,
+      deliveryAddress: {
+        ...prevData.deliveryAddress,
         [event.target.id]: event.target.value,
       },
     }));

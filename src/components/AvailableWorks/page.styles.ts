@@ -9,7 +9,7 @@ export const Item = styled(Sheet)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: "center",
   borderRadius: 4,
-  color: theme.vars.palette.text.secondary,
+  color: theme.palette.text.secondary,
 }));
 
 export const ItemDynamic = styled(Sheet)(({ theme }) => ({

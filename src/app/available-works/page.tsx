@@ -1,9 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Button, Grid, Typography } from "@mui/material";
-
-import { Item } from "./page.styles";
+import {Button, Card, Grid, Typography} from "@mui/material";
 
 async function getData() {
   try {
@@ -38,7 +36,7 @@ export default async function Page() {
           {data.map((item: any, index: any) => {
             return (
               <Grid key={`firstArrayIndex ${index}`} item xs={6}>
-                <Item>
+                <Card>
                   <Image
                     width={333}
                     height={333}
@@ -54,7 +52,7 @@ export default async function Page() {
                       Details
                     </Button>
                   </Link>
-                </Item>
+                </Card>
               </Grid>
             );
           })}
