@@ -1,12 +1,29 @@
 "use client";
 import React, { useState, FormEvent } from "react";
 import axios from "axios";
+import { PersonPinCircle } from '@mui/icons-material'
 
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { Container } from "@mui/joy";
 
 import styles from "./styles.module.css";
+import {
+  Box,
+  Button,
+  Grid,
+  Stack,
+  Step,
+  StepLabel,
+  Stepper,
+  Typography
+} from "@mui/material";
+import IdentificationForm from "@/components/forms/IdentificationForm";
+import AddressForm from "@/components/forms/AddressForm";
+import PaymentForm from "@/components/forms/PaymentForm";
+import {StepFormData} from "./page.types";
+
+const steps = ['Identification', 'Address', 'Payment'];
 
 const CreateAccount = () => {
   const [customer, setCustomer] = useState({
@@ -22,15 +39,25 @@ const CreateAccount = () => {
     zipCode: "",
   });
 
-  const [orderCode, setOrderCode] = useState("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCustomer((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    setDeliveryAddress((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  const [formData, setFormData] = useState<StepFormData>({
+    identification: {
+      firstName: '',
+      lastName: '',
+      email: ''
+    },
+    address: {
+      streetAddress: '',
+      city: '',
+      postalCode: '',
+      state: ''
+    },
+    payment: {
+      cardNumber: '',
+      cardHolderName: '',
+      expiryDate: '',
+      cvv: ''
+    },
+  });
 
   const router = useRouter();
 
@@ -53,8 +80,6 @@ const CreateAccount = () => {
         }
       );
 
-      console.log(response.data.orderCode);
-      setOrderCode(response.data.orderCode);
       localStorage.setItem("orderCode", response.data.orderCode);
       router.push("/payment");
 
@@ -69,90 +94,97 @@ const CreateAccount = () => {
     }
   };
 
+  const [activeStep, setActiveStep] = React.useState(0);
+  const [skipped, setSkipped] = React.useState(new Set<number>());
+
+  const isStepSkipped = (step: number) => {
+    return skipped.has(step);
+  };
+
+  const handleNext = () => {
+    let newSkipped = skipped;
+    if (isStepSkipped(activeStep)) {
+      newSkipped = new Set(newSkipped.values());
+      newSkipped.delete(activeStep);
+    }
+
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setSkipped(newSkipped);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const getStepContent = (step: number) => {
+    switch (step) {
+      case 0:
+        return <IdentificationForm formData={formData.identification} setFormData={setFormData} />;
+      case 1:
+        return <AddressForm formData={formData.address} setFormData={setFormData} />;
+      case 2:
+        return <PaymentForm formData={formData.payment} setFormData={setFormData} />;
+    }
+  };
+
   return (
-    <Container
-      maxWidth="xl"
-      style={{ padding: 0, margin: 0, height: "100vh" }}
-      className={styles.container_background}
-    >
-      <h2>Add Delivery Details</h2>
-      <form onSubmit={onSubmit} className={styles.form}>
-        <div className={styles.form_section}>
-          <label htmlFor="firstName" className={styles.label}>
-            First Name
-            <input
-              type="text"
-              name="firstName"
-              id="firstName"
-              className={styles.input}
-              value={customer.firstName}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="lastName" className={styles.label}>
-            Last Name
-            <input
-              type="text"
-              name="lastName"
-              id="lastName"
-              className={styles.input}
-              value={customer.lastName}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="streetAddress" className={styles.label}>
-            Street Address
-            <input
-              type="text"
-              name="streetAddress"
-              id="streetAddress"
-              className={styles.input}
-              value={deliveryAddress.streetAddress}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div className={styles.form_section}>
-          <label htmlFor="city" className={styles.label}>
-            City
-            <input
-              type="text"
-              name="city"
-              id="city"
-              className={styles.input}
-              value={deliveryAddress.city}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="city" className={styles.label}>
-            Zip Code
-            <input
-              type="text"
-              name="zipCode"
-              id="zipCode"
-              className={styles.input}
-              value={deliveryAddress.zipCode}
-              onChange={handleChange}
-            />
-          </label>
+    <Container maxWidth="xl">
+      <Box
+        padding={0}
+        margin={0}
+        height="100vh"
+        bgcolor="#fff"
+        textAlign="center"
+      >
+        <Typography
+          component="p"
+          color="black"
+          sx={{
+            paddingY: 3
+          }}
+        >Fill the information bellow</Typography>
 
-          <label htmlFor="phoneNumber" className={styles.label}>
-            Phone Number
-            <input
-              type="number"
-              name="phoneNumber"
-              id="phoneNumber"
-              className={styles.input}
-              value={customer.phoneNumber}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-      </form>
+        <Stack
+          height="calc(100% - 30px)"
+        >
+          <Stepper alternativeLabel activeStep={activeStep}>
+            {steps.map((label, index) => {
+              return (
+                <Step key={label}>
+                  <StepLabel>
+                    {label}
+                  </StepLabel>
+                </Step>
 
-      <button type="submit" className={styles.button}>
-        Submit
-      </button>
+              );
+            })}
+          </Stepper>
+
+          <Box
+            maxWidth={600}
+            marginX="auto"
+            position="relative"
+            top="40%"
+            sx={{
+              transform: "translateY(-60%)"
+            }}
+          >
+            {getStepContent(activeStep)}
+            <Grid container spacing={2} marginTop={2}>
+              <Grid item>
+                <Button disabled={activeStep === 0} onClick={handleBack}>
+                  Back
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button variant="contained" color="primary" onClick={handleNext}>
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
+        </Stack>
+      </Box>
     </Container>
   );
 };
