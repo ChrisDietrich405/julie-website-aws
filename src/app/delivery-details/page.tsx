@@ -20,6 +20,7 @@ import IdentificationForm from "@/components/forms/IdentificationForm";
 import AddressForm from "@/components/forms/AddressForm";
 import PaymentForm from "@/components/forms/PaymentForm";
 import {StepFormData} from "./page.types";
+import { OrdersApi } from "@/services/orders.service";
 
 const steps = ['Identification', 'Address', 'Payment'];
 
@@ -46,27 +47,33 @@ const CreateAccount = () => {
 
   const router = useRouter();
 
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = async (e?: FormEvent<HTMLFormElement>) => {
+    e?.preventDefault();
 
-    const token = localStorage.getItem("token");
+
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/orders",
-        {
-          customer: formData.identification,
-          deliveryAddress: formData.deliveryAddress,
-        },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
+
+      const response = await OrdersApi.post({
+        customer: formData.identification,
+        deliveryAddress: formData.deliveryAddress,
+      });
+
+      // const response = await axios.post(
+      //   "http://localhost:3000/api/orders",
+      //   {
+      //     customer: formData.identification,
+      //     deliveryAddress: formData.deliveryAddress,
+      //   },
+      //   {
+      //     headers: {
+      //       Authorization: token,
+      //     },
+      //   }
+      // );
 
       localStorage.setItem("orderCode", response.data.orderCode);
-      router.push("/payment");
+      // router.push("/payment");
 
       //   if (response.data.account.profile_id === 1) {
       //     Router.push("/invoice-dashboard");
@@ -87,6 +94,11 @@ const CreateAccount = () => {
   };
 
   const handleNext = () => {
+    if (activeStep === steps.length - 1) {
+      return onSubmit();
+    }
+
+
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());

@@ -25,6 +25,14 @@ const Checkout = () => {
 
   const router = useRouter();
 
+  const handleRedirect = () => {
+      if (!userId) {
+        router.push("/login");
+      } else {
+        router.push("/delivery-details")
+      }
+  }
+
   return (
     <Container sx={{ marginTop: "30px" }}>
       <Grid container spacing={2}>
@@ -62,7 +70,7 @@ const Checkout = () => {
         <Grid item lg={3}>
           {" "}
           <Card>
-            <Button onClick={() => router.push("/delivery-details")}>
+            <Button onClick={handleRedirect}>
               Proceed to delivery details
             </Button>
           </Card>

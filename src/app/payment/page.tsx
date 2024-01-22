@@ -3,11 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
-// import Image from "next/image";
-import { Container, Button, Typography } from "@mui/joy";
-import { Router } from "next/router";
-// import { Grid, Typography, TextField } from "@mui/material";
-// import AddToCart from "@/components/AddToCart";
+import { Container, Button, Typography } from "@mui/material";
 
 const Payment = () => {
   const [orderCodeState, setOrderCodeState] = useState("");
