@@ -1,13 +1,11 @@
 "use client";
 import React, { useState, FormEvent } from "react";
 import axios from "axios";
-import { PersonPinCircle } from '@mui/icons-material'
 
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { Container } from "@mui/joy";
 
-import styles from "./styles.module.css";
 import {
   Box,
   Button,
@@ -26,26 +24,13 @@ import {StepFormData} from "./page.types";
 const steps = ['Identification', 'Address', 'Payment'];
 
 const CreateAccount = () => {
-  const [customer, setCustomer] = useState({
-    firstName: "",
-    lastName: "",
-    phoneNumber: 0,
-    email: "",
-  });
-
-  const [deliveryAddress, setDeliveryAddress] = useState({
-    streetAddress: "",
-    city: "",
-    zipCode: "",
-  });
-
   const [formData, setFormData] = useState<StepFormData>({
     identification: {
       firstName: '',
       lastName: '',
       email: ''
     },
-    address: {
+    deliveryAddress: {
       streetAddress: '',
       city: '',
       postalCode: '',
@@ -70,8 +55,8 @@ const CreateAccount = () => {
       const response = await axios.post(
         "http://localhost:3000/api/orders",
         {
-          customer,
-          deliveryAddress,
+          customer: formData.identification,
+          deliveryAddress: formData.deliveryAddress,
         },
         {
           headers: {
@@ -121,7 +106,7 @@ const CreateAccount = () => {
       case 0:
         return <IdentificationForm formData={formData.identification} setFormData={setFormData} />;
       case 1:
-        return <AddressForm formData={formData.address} setFormData={setFormData} />;
+        return <AddressForm formData={formData.deliveryAddress} setFormData={setFormData} />;
       case 2:
         return <PaymentForm formData={formData.payment} setFormData={setFormData} />;
     }
@@ -148,7 +133,7 @@ const CreateAccount = () => {
           height="calc(100% - 30px)"
         >
           <Stepper alternativeLabel activeStep={activeStep}>
-            {steps.map((label, index) => {
+            {steps.map((label) => {
               return (
                 <Step key={label}>
                   <StepLabel>

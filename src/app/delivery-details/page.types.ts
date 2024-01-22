@@ -4,6 +4,6 @@ import {PaymentFormData} from "@/components/forms/PaymentForm/PaymentForm.types"
 
 export type StepFormData = {
   identification: IdentificationFormData,
-  address: AddressFormData,
+  deliveryAddress: AddressFormData,
   payment: PaymentFormData,
 }
