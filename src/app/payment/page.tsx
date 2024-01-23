@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 
 import { Container, Button, Typography } from "@mui/material";
+import {OrdersApi} from "@/services/orders.service";
 
 const Payment = () => {
   const [orderCodeState, setOrderCodeState] = useState("");
@@ -15,13 +16,8 @@ const Payment = () => {
   };
 
   const updatePayment = async () => {
-    const response = await axios.put(
-      `http://localhost:3000/api/orders/${orderCodeState}`,
-      {
-        type: "credit card",
-      }
-    );
-    console.log(response);
+
+    await OrdersApi.put(orderCodeState, {type: 'credit card'});
   };
 
   useEffect(() => {
