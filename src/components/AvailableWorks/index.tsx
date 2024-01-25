@@ -14,7 +14,6 @@ interface IData {
 }
 
 export default function RowAndColumnSpacing() {
-  //   const pairs = lodashChunk(data, 2);
   const router = useRouter();
 
   const [data, setData] = useState<IData[]>([]);
