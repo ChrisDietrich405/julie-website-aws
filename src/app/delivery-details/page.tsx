@@ -4,11 +4,13 @@ import axios from "axios";
 
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { Container } from "@mui/joy";
+
+import { LoadingButton } from '@mui/lab';
 
 import {
   Box,
   Button,
+  Container,
   Grid,
   Stack,
   Step,
@@ -45,44 +47,27 @@ const CreateAccount = () => {
     },
   });
 
+  const [ loader, setLoader] = useState(false);
+
   const router = useRouter();
 
   const onSubmit = async (e?: FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
 
-
-
     try {
-
+      setLoader(true);
       const response = await OrdersApi.post({
         customer: formData.identification,
         deliveryAddress: formData.deliveryAddress,
       });
 
-      // const response = await axios.post(
-      //   "http://localhost:3000/api/orders",
-      //   {
-      //     customer: formData.identification,
-      //     deliveryAddress: formData.deliveryAddress,
-      //   },
-      //   {
-      //     headers: {
-      //       Authorization: token,
-      //     },
-      //   }
-      // );
-
       localStorage.setItem("orderCode", response.data.orderCode);
-      // router.push("/payment");
+      router.push("/payment");
 
-      //   if (response.data.account.profile_id === 1) {
-      //     Router.push("/invoice-dashboard");
-      //   }
-      //   if (response.data.account.profile_id === 2) {
-      //     Router.push("/useraccount");
-      //   }
     } catch (error) {
       toast.error("Incorrect email or password");
+    } finally {
+      setLoader(false);
     }
   };
 
@@ -125,7 +110,9 @@ const CreateAccount = () => {
   };
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{
+      paddingY: 5
+    }}>
       <Box
         padding={0}
         margin={0}
@@ -141,9 +128,7 @@ const CreateAccount = () => {
           }}
         >Fill the information bellow</Typography>
 
-        <Stack
-          height="calc(100% - 30px)"
-        >
+        <Stack>
           <Stepper alternativeLabel activeStep={activeStep}>
             {steps.map((label) => {
               return (
@@ -160,11 +145,7 @@ const CreateAccount = () => {
           <Box
             maxWidth={600}
             marginX="auto"
-            position="relative"
-            top="40%"
-            sx={{
-              transform: "translateY(-60%)"
-            }}
+            marginTop={10}
           >
             {getStepContent(activeStep)}
             <Grid container spacing={2} marginTop={2}>
@@ -174,9 +155,9 @@ const CreateAccount = () => {
                 </Button>
               </Grid>
               <Grid item>
-                <Button variant="contained" color="primary" onClick={handleNext}>
+                <LoadingButton variant="contained" color="primary" onClick={handleNext}>
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                </Button>
+                </LoadingButton>
               </Grid>
             </Grid>
           </Box>
