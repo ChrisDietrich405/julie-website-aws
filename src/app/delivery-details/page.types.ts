@@ -1,4 +1,5 @@
+import {DefaultValuesOption} from "@stripe/stripe-js";
 
-export type StepFormData = {
-
+export interface ICostumer extends DefaultValuesOption {
+  email: string;
 }
