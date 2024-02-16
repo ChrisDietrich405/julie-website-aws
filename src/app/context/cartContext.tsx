@@ -1,22 +1,23 @@
 "use client";
-import { createContext, useState, useEffect } from "react";
-import { cartI } from "../types/cart";
+import {createContext, useEffect, useState} from "react";
+import {ICart} from "@/models";
 
 export const cartContext = createContext<{
-  cart: cartI[];
-  setCart: React.Dispatch<React.SetStateAction<cartI[]>>;
+  cart: ICart;
+  setCart: React.Dispatch<React.SetStateAction<ICart>>;
 }>({
   cart: [],
-  setCart: () => {},
+  setCart: () => {
+  },
 });
 
-export const CartContextProvider = ({ children }: any) => {
-  const [cart, setCart] = useState<cartI[]>([]);
+export const CartContextProvider = ({children}: any) => {
+  const [cart, setCart] = useState<ICart>([]);
 
   useEffect(() => {
     if (cart.length) {
       localStorage.setItem("cart", JSON.stringify(cart));
-    } 
+    }
   }, [cart]);
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export const CartContextProvider = ({ children }: any) => {
   }, []);
 
   return (
-    <cartContext.Provider value={{ cart, setCart }}>
+    <cartContext.Provider value={{cart, setCart}}>
       {children}
     </cartContext.Provider>
   );

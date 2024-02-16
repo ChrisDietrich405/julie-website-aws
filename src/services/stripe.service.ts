@@ -1,8 +1,8 @@
-import {StripeAuthorizationApi} from "@/services/StripeAuthorizationApi";
-
-const baseUrl = 'https://api.stripe.com/v1'
+import {BaseApi} from "@/services/base.service";
+import {ICartItem} from "@/models";
+import {IPaymentIntentResponse} from "@/models/stripe.models";
 
 export const StripeApi = {
-  createPaymentIntent: async (data: any): Promise<any> =>
-    StripeAuthorizationApi.post(baseUrl + '/payment_intents', data),
+  CreatePaymentIntent: async (items: ICartItem[]): Promise<IPaymentIntentResponse> =>
+    BaseApi.post('/api/create-payment-intent', {items}),
 }
