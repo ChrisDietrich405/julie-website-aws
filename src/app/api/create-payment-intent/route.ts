@@ -1,11 +1,10 @@
 import {NextRequest, NextResponse} from "next/server";
 import Stripe from 'stripe'
-import {NextApiResponse} from "next";
 import {ICart} from "@/models";
 
 const stripe = new Stripe(process.env.STRIPE_KEY as string)
 
-export async function POST(req: NextRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest) {
 
   const body: { items: ICart } = await req.json();
 
