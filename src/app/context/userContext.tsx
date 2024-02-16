@@ -17,6 +17,7 @@ export const UserContextProvider = ({ children }: any) => {
 
   useEffect(() => {
     localStorage.setItem("userId", userId);
+    console.log(userId);
   }, [userId]);
 
   useEffect(() => {

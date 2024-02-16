@@ -13,6 +13,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import { cartContext } from "@/app/context/cartContext";
+import { userContext } from "@/app/context/userContext";
 
 const navLinks = [
   {
@@ -35,18 +36,19 @@ const navLinks = [
     title: "Available Works",
     route: "/available-works",
   },
-  // {
-  //   title: "Book",
-  //   route: "/book",
-  // },
+];
+
+const navLinksFunction = (isLoggedIn: boolean) => [
+  ...navLinks,
   {
-    title: "Log in",
-    route: "/login",
+    title: isLoggedIn ? "Log out" : "Log in",
+    route: isLoggedIn ? "/" : "/login",
   },
 ];
 
 export default function Navbar() {
   const { cart } = useContext(cartContext);
+  const { setUserId, userId } = useContext(userContext);
 
   const router = useRouter();
 
@@ -55,6 +57,10 @@ export default function Navbar() {
   };
 
   const length = cart?.length;
+
+  const handleLogout = () => {
+    setUserId("");
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -76,9 +82,16 @@ export default function Navbar() {
           >
             Julie Dietrich Art
           </Typography>
-          {navLinks.map((navLink, index) => {
+          {navLinksFunction(!!userId).map((navLink, index) => {
             return (
-              <Link key={index} href={navLink.route} passHref>
+              <Link
+                key={index}
+                href={navLink.route}
+                passHref
+                onClick={() => {
+                  navLink.route === "/logout" ? handleLogout() : undefined;
+                }}
+              >
                 <Button sx={{ mx: 2 }} variant="text" className="btn">
                   {navLink.title}
                 </Button>
