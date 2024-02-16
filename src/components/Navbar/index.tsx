@@ -89,7 +89,7 @@ export default function Navbar() {
                 href={navLink.route}
                 passHref
                 onClick={() => {
-                  navLink.route === "/logout" ? handleLogout() : undefined;
+                  navLink.title === "Log out" ? handleLogout() : undefined;
                 }}
               >
                 <Button sx={{ mx: 2 }} variant="text" className="btn">
