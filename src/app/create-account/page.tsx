@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, FormEvent } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { Container } from "@mui/joy";
@@ -18,6 +18,7 @@ const CreateAccount = () => {
   const router = useRouter();
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    console.log("hello");
     e.preventDefault();
     try {
       await axios.post("http://localhost:3000/api/user", {
@@ -29,7 +30,6 @@ const CreateAccount = () => {
         password,
       });
 
-      // localStorage.setItem("token", `Bearer ${response.data.token}`);
       router.push("/login");
       toast.success("Created account successfully");
       //   if (response.data.account.profile_id === 1) {
@@ -38,8 +38,10 @@ const CreateAccount = () => {
       //   if (response.data.account.profile_id === 2) {
       //     Router.push("/useraccount");
       //   }
-    } catch (error) {
-      toast.error("Incorrect email or password");
+    } catch (error: unknown) {
+      const errorMessage = (error as AxiosError<{ message: string }>).response
+        ?.data.message;
+      toast.error(errorMessage);
     }
   };
 

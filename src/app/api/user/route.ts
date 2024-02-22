@@ -14,24 +14,39 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     !email ||
     !password
   ) {
-    return NextResponse.json({
-      status: 400,
-      message: "Please add all necessary information",
-    });
+    return NextResponse.json(
+      {
+        status: 400,
+        message: "Please add all necessary information",
+      },
+      {
+        status: 400,
+      }
+    );
   }
 
   const emailFormat = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
   if (!email.match(emailFormat)) {
-    return NextResponse.json({
-      status: 400,
-      message: "Incorrect email format",
-    });
+    return NextResponse.json(
+      {
+        status: 400,
+        message: "Incorrect email format",
+      },
+      {
+        status: 400,
+      }
+    );
   }
 
   const existingEmail = await UsersModel.findOne({ email });
   if (existingEmail) {
-    return NextResponse.json({ status: 409, message: "Duplicate email" });
+    return NextResponse.json(
+      { status: 409, message: "Duplicate email" },
+      {
+        status: 409,
+      }
+    );
   }
 
   try {
@@ -51,6 +66,11 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 
     return NextResponse.json({ status: 201, message: "User created" });
   } catch (error: any) {
-    return NextResponse.json({ status: 500, message: error.message });
+    return NextResponse.json(
+      { status: 500, message: error.message },
+      {
+        status: 500,
+      }
+    );
   }
 };

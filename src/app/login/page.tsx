@@ -3,7 +3,8 @@ import React, { useState, FormEvent, useContext } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
 import { Oval } from "react-loader-spinner";
 import { Container } from "@mui/joy";
 
@@ -50,17 +51,18 @@ const Login = () => {
       localStorage.setItem("token", `Bearer ${response.data.token}`);
 
       if (cart.length === 0) {
-        console.log(cart.length);
         router.push("/");
       }
 
       if (cart.length > 0) {
         router.push("/delivery-details");
       }
-
+    } catch (error: unknown) {
+      const errorMessage = (error as AxiosError<{ message: string }>).response
+        ?.data.message;
+      toast.error(errorMessage);
+    } finally {
       setLoading(false);
-    } catch (error) {
-      toast.error("Incorrect email or password");
     }
   };
 
@@ -70,7 +72,7 @@ const Login = () => {
       style={{ padding: 0, margin: 0, height: "100vh" }}
       className={styles.container_background}
     >
-      <ToastContainer />
+      
 
       {loading ? (
         <div className={styles.loader}>

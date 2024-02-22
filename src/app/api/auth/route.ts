@@ -10,24 +10,39 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   const { email, password } = await req.json();
 
   if (!email || !password) {
-    return NextResponse.json({
-      status: 400,
-      message: "Please add all necessary information",
-    });
+    return NextResponse.json(
+      {
+        status: 400,
+        message: "Please add all necessary information",
+      },
+      {
+        status: 400,
+      }
+    );
   }
 
   const emailFormat = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
   if (!email.match(emailFormat)) {
-    return NextResponse.json({
-      status: 400,
-      message: "Incorrect email format",
-    });
+    return NextResponse.json(
+      {
+        status: 400,
+        message: "Incorrect email format",
+      },
+      {
+        status: 400,
+      }
+    );
   }
 
   const existingAccount = await UsersModel.findOne({ email });
   if (!existingAccount) {
-    return NextResponse.json({ status: 401, message: "Incorrect credentials" });
+    return NextResponse.json(
+      { status: 401, message: "Incorrect credentials" },
+      {
+        status: 401,
+      }
+    );
   }
 
   const matchedPassword = await bcrypt.compare(
@@ -35,7 +50,12 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     existingAccount.password
   );
   if (!matchedPassword) {
-    return NextResponse.json({ status: 401, message: "Incorrect credentials" });
+    return NextResponse.json(
+      { status: 401, message: "Incorrect credentials" },
+      {
+        status: 401,
+      }
+    );
   }
 
   const token = jwt.sign(

@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Roboto_Mono } from "next/font/google";
+import { ToastContainer } from "react-toastify";
 // import { ThemeProvider, createMuiTheme } from 'material-ui/styles';
 
 import Navbar from "@/components/Navbar";
@@ -35,9 +36,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-       {/* <ThemeProvider theme={THEME}> */}
+      {/* <ThemeProvider theme={THEME}> */}
       <body className={robotoMono.className}>
         <Providers>
+          <ToastContainer />
           <Navbar />
           {children}
           <Footer />
