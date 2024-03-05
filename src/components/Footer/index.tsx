@@ -9,10 +9,9 @@ const index = () => {
   };
 
   return (
-    <Container  sx={{
-      backgroundColor: 'grey.100'
-    }}>
-        <Typography component="h4" sx={{ textAlign: "center", mt: 4 }}>
+    <div className={styles.wrapper}>
+      <Container>
+        <Typography component="h4" sx={{ textAlign: "center", mb: 4 }}>
           Sign up to my newsletter for exclusive updates
         </Typography>
         <Box
@@ -22,17 +21,12 @@ const index = () => {
             gap: 8,
           }}
         >
-          <TextField
-            id="outlined-basic"
-            label="First Name"
-            variant="outlined"
-          />
-          <TextField id="outlined-basic" label="Last Name" variant="outlined" />
+          <TextField id="outlined-basic" label="Name" variant="outlined" />
           <TextField id="outlined-basic" label="Email" variant="outlined" />
+          <Button className="btn">Sign Up</Button>
         </Box>
-        <Button>Sign Up</Button>
         <Box>
-          <Typography sx={{ textAlign: "center" }}>
+          <Typography sx={{ textAlign: "center", mt: 4 }}>
             Sign up to my newsletter for exclusive updates
           </Typography>
         </Box>
@@ -52,7 +46,8 @@ const index = () => {
         <Typography sx={{ textAlign: "center" }}>
           Copyright © Dietrich {copyrightYear()}
         </Typography>
-    </Container>
+      </Container>
+    </div>
   );
 };
 

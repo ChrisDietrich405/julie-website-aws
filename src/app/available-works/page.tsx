@@ -13,7 +13,6 @@ async function getData() {
 
     const data = await res.json();
 
-
     return data;
   } catch (error) {
     console.log(error);
@@ -66,7 +65,6 @@ export default async function Page() {
                     <Typography variant="h4">
                       {item.title}
                     </Typography>
-
                     <Link href={`/available-works/${item._id}`}>
                       <Button
                         fullWidth

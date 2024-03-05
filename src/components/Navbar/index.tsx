@@ -92,7 +92,7 @@ export default function Navbar() {
                   navLink.title === "Log out" ? handleLogout() : undefined;
                 }}
               >
-                <Button sx={{ mx: 2 }} variant="text" className="btn">
+                <Button sx={{ mx: 2 }} variant="text" className="navbar-btn">
                   {navLink.title}
                 </Button>
               </Link>

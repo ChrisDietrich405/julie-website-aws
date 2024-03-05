@@ -1,17 +1,15 @@
 :root {
   --primary: #eeeff0;
-  /* --secondary: #cc1e1e;
-  --neutral-light: #c2b9c2;
-  --neutral-dark: #494850;
-  --hover: #1565c0;
-  --background: #f3f0f0; */
+  --secondary: #3492dc;
+  --tertiary: #fff;
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif !important;
 }
 
 h1 {
@@ -21,13 +19,23 @@ h1 {
 }
 
 .btn {
+  background-color: var(--secondary) !important;
+  color: var(--tertiary) !important;
+}
+
+.btn.btn-large {
+  text-transform: uppercase;
+  padding: 14px 40px;
+  margin-left: auto;
+  display: block;
+}
+
+.navbar-btn {
   color: #000 !important;
   transition: 1s;
 }
 
-.btn:hover {
+.navbar-btn:hover {
   transition: 2s;
   transform: scale(1.1);
 }
-
-

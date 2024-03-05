@@ -9,10 +9,10 @@ const About = () => {
       <Typography sx={{ textAlign: "center", my: 3 }} level="h1" component="h1">
         About Dr. Dietrich Eisler
       </Typography>
-      <Grid container spacing={2} sx={{ mb: 3 }}>
+      <Grid container spacing={6} sx={{ mb: 3 }}>
         <Grid
           item
-          xs={6}
+          xs={4}
           sx={{ display: "flex", justifyContent: "space-evenly" }}
         >
           <Image
@@ -24,7 +24,7 @@ const About = () => {
         </Grid>
         <Grid
           item
-          xs={6}
+          xs={8}
           sx={{
             display: "flex",
             flexDirection: "column",

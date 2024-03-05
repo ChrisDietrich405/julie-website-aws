@@ -10,7 +10,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 
   const userId = requestHeaders.get("x-decoded-id");
 
-
   if (!userId) {
     return NextResponse.json({ status: 401, message: "Unauthorized user" });
   }
